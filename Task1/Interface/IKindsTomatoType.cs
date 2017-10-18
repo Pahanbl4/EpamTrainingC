@@ -8,7 +8,7 @@ namespace Task1.Interface
 {
     interface IKindsTomatoType
     {
-        int Tomatoes { get; }
+        int Tomato { get; }
         int Eggplant { get; }
         int BellPeppers { get; }
     }

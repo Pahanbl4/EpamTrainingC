@@ -21,7 +21,7 @@ namespace Task1.Classes
 
         public int Pumpkin { get; set; }
 
-        public int Tomatoes { get; set; }
+        public int Tomato { get; set; }
 
         public int Eggplant { get; set; }
 

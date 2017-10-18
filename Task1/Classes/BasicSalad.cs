@@ -7,7 +7,7 @@ using Task1.Interface;
 
 namespace Task1.Classes
 {
-    class BasicSalad : IBasicSalad
+    class BasicSalad :KindsVegitables, IBasicSalad
     {
         public string Name { get; set; }
 
