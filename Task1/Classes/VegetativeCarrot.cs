@@ -8,5 +8,12 @@ namespace Task1.Classes
 {
     class VegetativeCarrot: VegetativeVegetableCrops
     {
+        public VegetativeCarrot()
+        {
+            VegetableName = "Carrot";
+            VegetableWeight = 150;
+            VegetableCaloricity = 60;
+            Culture = "Root Crops";
+        }
     }
 }
