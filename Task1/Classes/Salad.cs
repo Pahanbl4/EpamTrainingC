@@ -21,7 +21,12 @@ namespace Task1.Classes
         public void SortByWeight()
         {
             var result = Items.OrderBy(items => items.VegetableWeight).Select(items => items);
-            foreach (var u in result) { u.ToString(); }
+            foreach (var i in result) { i.ToString(); }
+        }
+        public void SortByName()
+        {
+            var result = Items.OrderBy(item => item.VegetableName).Select(item => item);
+            foreach(var i in result) { i.ToString(); }
         }
     }
 }
