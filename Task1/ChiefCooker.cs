@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Program
+    class ChiefCooker
     {
         static void Main(string[] args)
         {

@@ -53,6 +53,11 @@ namespace Task1.Classes
         {
             get { return Items.Sum(x => x.VegetableCaloricity); }
         }
+        public void CompareByCaloricity(double AmountByCaloricity)
+        {
+            var result = Items.Where(item => item.VegetableCaloricity == AmountByCaloricity).Select(item => item);
+            foreach(var i in result) { i.ToString(); }
+        }
 
     }
 }
