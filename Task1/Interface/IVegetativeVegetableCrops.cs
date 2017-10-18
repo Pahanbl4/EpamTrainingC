@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task1.Interface
 {
-    interface IBasicSalad
+    interface IVegetativeVegetableCrops
     {
-        string Name { get; }
-        double Weight { get; }
-        double Caloricity { get; }
+        string Culture { get; }
     }
 }

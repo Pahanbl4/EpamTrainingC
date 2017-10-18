@@ -9,10 +9,10 @@ namespace Task1.Classes
 {
     class Salad
     {
-        public ICollection<IBasicSalad> Items { get; protected set; }
+        public ICollection<IBasicVegetable> Items { get; protected set; }
         public string Name { get; protected set; }
 
-        public Salad(string name,ICollection<IBasicSalad> items)
+        public Salad(string name,ICollection<IBasicVegetable> items)
         {
             Name = name;
             Items = items;
@@ -20,7 +20,7 @@ namespace Task1.Classes
 
         public void SortByWeight()
         {
-            var result = Items.OrderBy(items => items.Weight).Select(items => items);
+            var result = Items.OrderBy(items => items.VegetableWeight).Select(items => items);
             foreach (var u in result) { u.ToString(); }
         }
     }

@@ -41,16 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BasicSalad.cs" />
-    <Compile Include="Classes\KindsVegitables.cs" />
+    <Compile Include="Classes\BasicVegetable.cs" />
+    <Compile Include="Classes\FruitCucumber.cs" />
+    <Compile Include="Classes\FruitHaricot.cs" />
+    <Compile Include="Classes\FruitTomato.cs" />
+    <Compile Include="Classes\FruitVegetableCrops.cs" />
     <Compile Include="Classes\Salad.cs" />
-    <Compile Include="Classes\SaladDnestr.cs" />
-    <Compile Include="Classes\SaladPekinski.cs" />
-    <Compile Include="Classes\SaladVitamin.cs" />
-    <Compile Include="Interface\IBasicSalad.cs" />
-    <Compile Include="Interface\IKindsCabbageType.cs" />
-    <Compile Include="Interface\IKindsPumpkinType.cs" />
-    <Compile Include="Interface\IKindsTomatoType.cs" />
+    <Compile Include="Classes\VegetativeCabbage.cs" />
+    <Compile Include="Classes\VegetativeCarrot.cs" />
+    <Compile Include="Classes\VegetativePekingCabbage.cs" />
+    <Compile Include="Classes\VegetativeVegetableCrops.cs" />
+    <Compile Include="Interface\IBasicVegetable.cs" />
+    <Compile Include="Interface\IFruitVegetableCrops.cs" />
+    <Compile Include="Interface\IVegetativeVegetableCrops.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task1.Interface
 {
-    interface IKindsCabbageType
+    interface IFruitVegetableCrops
     {
-        int Сauliflower { get; }
-        int PekingCabbage { get; }
-        int WhiteCabbage { get; }
+        string Family { get; }
     }
 }

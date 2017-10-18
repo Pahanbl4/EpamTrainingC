@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Task1.Interface
 {
-    interface IKindsPumpkinType
+    interface IBasicVegetable
     {
-        int Сucumber { get; }
-        int Zucchini { get; }
-        int Pumpkin { get; }
+        string VegetableName { get; }
+        double VegetableWeight { get; }
+        double VegetableCaloricity { get; }
     }
 }
