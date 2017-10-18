@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Classes\BasicSalad.cs" />
     <Compile Include="Classes\KindsVegitables.cs" />
+    <Compile Include="Classes\Salad.cs" />
     <Compile Include="Classes\SaladDnestr.cs" />
     <Compile Include="Classes\SaladPekinski.cs" />
     <Compile Include="Classes\SaladVitamin.cs" />
