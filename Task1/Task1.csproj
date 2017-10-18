@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BasicSalad.cs" />
+    <Compile Include="Classes\KindsVegitables.cs" />
     <Compile Include="Interface\IBasicSalad.cs" />
     <Compile Include="Interface\IKindsCabbageType.cs" />
     <Compile Include="Interface\IKindsPumpkinType.cs" />
@@ -51,8 +53,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
