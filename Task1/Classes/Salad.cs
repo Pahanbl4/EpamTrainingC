@@ -28,5 +28,31 @@ namespace Task1.Classes
             var result = Items.OrderBy(item => item.VegetableName).Select(item => item);
             foreach(var i in result) { i.ToString(); }
         }
+
+        public void AddVegetable(IBasicVegetable item)
+        {
+            Items.Add(item);
+        }
+
+        public void DeleteVegetable(IBasicVegetable item)
+        {
+            Items.Remove(item);
+        }
+       public void ShowAll()
+        {
+            foreach (var item in this.Items)
+                item.ToString();
+        }
+
+        public double WightSum
+        {
+            get { return Items.Sum(x => x.VegetableWeight); }
+        }
+
+        public double CaloritySum
+        {
+            get { return Items.Sum(x => x.VegetableCaloricity); }
+        }
+
     }
 }
