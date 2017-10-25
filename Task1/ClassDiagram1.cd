@@ -40,7 +40,7 @@
   <Class Name="Task1.Classes.Salad" Collapsed="true">
     <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAEAAAACCCABAAAAAQBAAAAAAAAEAAAAABAAAA=</HashCode>
+      <HashCode>AAAAABAEAAAACCCgBAAAAAQAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Classes\Salad.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -74,21 +74,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="Task1.Interface.IBasicVegetable" Collapsed="true">
-    <Position X="11.5" Y="2" Width="1.5" />
+    <Position X="10.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAIAAAAEAA=</HashCode>
       <FileName>Interface\IBasicVegetable.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Task1.Interface.IFruitVegetableCrops" Collapsed="true">
-    <Position X="11.5" Y="1.25" Width="1.5" />
+    <Position X="11.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Interface\IFruitVegetableCrops.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Task1.Interface.IVegetativeVegetableCrops" Collapsed="true">
-    <Position X="11.5" Y="2.75" Width="1.5" />
+    <Position X="10" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interface\IVegetativeVegetableCrops.cs</FileName>

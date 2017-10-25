@@ -18,23 +18,20 @@ namespace Task1.Classes
             Items = items;
         }
 
-        public void SortByWeight()
+        public ICollection<IBasicVegetable> SortByWeight
         {
-            var result = Items.OrderBy(items => items.VegetableWeight).
-                Select(items =>  items.VegetableName);
-            Console.WriteLine("\nSortirovka po vessu:");
-            foreach (var i in result)
-            { 
-                Console.WriteLine(i);
-            }
+           get
+            {
+                return Items.OrderBy(items => items.VegetableWeight).ToList();               
+            }          
         }
-        public void SortByName()
+
+        public ICollection<IBasicVegetable> SortByName
         {
-            var result = Items.OrderBy(item => item.VegetableName)
-                .Select(item =>  item.VegetableName);
-            Console.WriteLine("\nSortirovka po kalorijam:");
-            foreach(var i in result)
-            { Console.WriteLine(i); }
+         get
+            {
+                return Items.OrderBy(item => item.VegetableName).ToList();
+            }  
         }
 
         public void AddVegetable(IBasicVegetable item)
@@ -46,11 +43,12 @@ namespace Task1.Classes
         {
             Items.Remove(item);
         }
-       public void ShowAll()
+        public ICollection<IBasicVegetable>  ShowAllVegetablesInSeled
         {
-            Console.WriteLine("\nVse ovoshi:");
-            foreach (var item in this.Items)
-                Console.WriteLine(item.VegetableName);
+            get
+            {
+                return this.Items;
+           }
         }
 
         public double WeightSumm
@@ -58,19 +56,24 @@ namespace Task1.Classes
             get { return Items.Sum(x => x.VegetableWeight); }
         }
 
-        public double CaloritySum
+        public double CaloricitySumm
         {
             get { return Items.Sum(x => x.VegetableCaloricity); }
         }
-        public void CompareByCaloricity(double AmountByCaloricity)
+        public void CompareByCaloricity(double min,double max)
         {
-            var result = Items.Where(item => item.VegetableCaloricity == AmountByCaloricity).
-                Select(item => String.Format("\nTakaja kalorijnost v {0}", item.VegetableName));
+            var result = Items
+                .Where(item => item.VegetableCaloricity >=min)
+                .Where(item => item.VegetableCaloricity <=max)
+                .Select(item => String.Format("{0} = {1} callories", item.VegetableName,item.VegetableCaloricity));
             foreach(var i in result) {
 
                 Console.WriteLine(i.ToString());
+                
             }
         }
+
+      
 
     }
 }

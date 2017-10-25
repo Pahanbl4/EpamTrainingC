@@ -7,7 +7,7 @@ using Task1.Interface;
 
 namespace Task1.Classes
 {
-    class VegetativeVegetableCrops:BasicVegetable,IVegetativeVegetableCrops
+    class VegetativeVegetableCrops:BasicVegetable, IVegetativeVegetableCrops
     {
         public VegetativeVegetableCrops()
         {

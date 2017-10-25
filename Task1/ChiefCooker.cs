@@ -28,12 +28,37 @@ namespace Task1
             Salad1.AddVegetable(Vegetable4);
 
          
-            Salad1.SortByName();
-            Salad1.SortByWeight();
+           
+            Print(Salad1,20,100);
+
+        }
+
+        static void Print(Salad salad,double min,double max)
+        {
             
-            Console.WriteLine("\nSumma kalorij v salate1 = "+Salad1.CaloricitySumm);
-            Salad1.CompareByCaloricity(36);
-            Salad1.ShowAll();
+            Console.WriteLine("\n\tSalad Name {0}",salad.Name);
+            Console.WriteLine("\nAll vegetables in this Salad:");
+            foreach(var str in salad.ShowAllVegetablesInSeled)
+            {
+                Console.WriteLine(str.VegetableName);
+            }
+           
+
+            Console.WriteLine("\n\tSort by Name:");
+            foreach (var str in salad.SortByName)
+            {
+                Console.WriteLine(str.VegetableName);
+            }
+
+            Console.WriteLine("\n\tSort by Weight:");
+            foreach (var str in salad.SortByWeight)
+            {
+                Console.WriteLine("{0} = {1} gramm", str.VegetableName, str.VegetableWeight);
+            }
+
+            Console.WriteLine("\n\tSearch by calories from {0} to {1}", min, max);
+            salad.CompareByCaloricity(min, max);
+            Console.WriteLine("\nSum of calories in {1} salad = {0} callories", salad.CaloricitySumm, salad.Name);
 
         }
     }
