@@ -18,7 +18,7 @@ namespace Task1.Classes
             Items = items;
         }
 
-        public ICollection<IBasicVegetable> SortByWeight
+        public IEnumerable<IBasicVegetable> SortByWeight
         {
            get
             {
@@ -26,7 +26,7 @@ namespace Task1.Classes
             }          
         }
 
-        public ICollection<IBasicVegetable> SortByName
+        public IEnumerable<IBasicVegetable> SortByName
         {
          get
             {
@@ -43,7 +43,7 @@ namespace Task1.Classes
         {
             Items.Remove(item);
         }
-        public ICollection<IBasicVegetable>  ShowAllVegetablesInSeled
+        public IEnumerable<IBasicVegetable>  ShowAllVegetablesInSeled
         {
             get
             {
@@ -60,17 +60,15 @@ namespace Task1.Classes
         {
             get { return Items.Sum(x => x.VegetableCaloricity); }
         }
-        public void CompareByCaloricity(double min,double max)
+        public IEnumerable<IBasicVegetable> CompareByCaloricity(double min,double max)
         {
             var result = Items
-                .Where(item => item.VegetableCaloricity >=min)
-                .Where(item => item.VegetableCaloricity <=max)
-                .Select(item => String.Format("{0} = {1} callories", item.VegetableName,item.VegetableCaloricity));
-            foreach(var i in result) {
-
-                Console.WriteLine(i.ToString());
+                .Where(item => item.VegetableCaloricity >= min)
+                .Where(item => item.VegetableCaloricity <= max)
+              //  .Select(item => String.Format("{0} = {1} callories", item.VegetableName, item.VegetableCaloricity))
+                .ToArray();
                 
-            }
+            return result;
         }
 
       

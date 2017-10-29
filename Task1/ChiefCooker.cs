@@ -27,8 +27,8 @@ namespace Task1
             Salad1.DeleteVegetable(Vegetable4);
             Salad1.AddVegetable(Vegetable4);
 
-         
-           
+
+            
             Print(Salad1,20,100);
 
         }
@@ -57,6 +57,10 @@ namespace Task1
             }
 
             Console.WriteLine("\n\tSearch by calories from {0} to {1}", min, max);
+            foreach (var str in salad.CompareByCaloricity(min,max))
+            {
+                Console.WriteLine("{0}={1}",str.VegetableName,str.VegetableCaloricity);
+            }
             salad.CompareByCaloricity(min, max);
             Console.WriteLine("\nSum of calories in {1} salad = {0} callories", salad.CaloricitySumm, salad.Name);
 
