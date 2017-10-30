@@ -9,7 +9,7 @@ namespace Task1.Classes
 {
     class Salad
     {
-        public ICollection<IBasicVegetable> Items { get; protected set; }
+        public ICollection<IBasicVegetable> Items { get; private set; }
         public string Name { get; protected set; }
 
         public Salad(string name,ICollection<IBasicVegetable> items)
@@ -22,7 +22,7 @@ namespace Task1.Classes
         {
            get
             {
-                return Items.OrderBy(items => items.VegetableWeight).ToList();               
+                return Items.OrderBy(items => items.VegetableWeight).ToArray();               
             }          
         }
 
@@ -30,7 +30,7 @@ namespace Task1.Classes
         {
          get
             {
-                return Items.OrderBy(item => item.VegetableName).ToList();
+                return Items.OrderBy(item => item.VegetableName).ToArray();
             }  
         }
 
@@ -60,12 +60,12 @@ namespace Task1.Classes
         {
             get { return Items.Sum(x => x.VegetableCaloricity); }
         }
-        public IEnumerable<IBasicVegetable> CompareByCaloricity(double min,double max)
+
+        public IEnumerable<IBasicVegetable> SearchByCaloricity(double min,double max)
         {
             var result = Items
                 .Where(item => item.VegetableCaloricity >= min)
                 .Where(item => item.VegetableCaloricity <= max)
-              //  .Select(item => String.Format("{0} = {1} callories", item.VegetableName, item.VegetableCaloricity))
                 .ToArray();
                 
             return result;

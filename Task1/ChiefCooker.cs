@@ -27,9 +27,12 @@ namespace Task1
             Salad1.DeleteVegetable(Vegetable4);
             Salad1.AddVegetable(Vegetable4);
 
+            int MinSearchByCaloricity = 20;
+            int MaxSearchByCaloricity = 100;
 
-            
-            Print(Salad1,20,100);
+
+
+          Print(Salad1,MinSearchByCaloricity,MaxSearchByCaloricity);
 
         }
 
@@ -37,13 +40,13 @@ namespace Task1
         {
             
             Console.WriteLine("\n\tSalad Name {0}",salad.Name);
+
             Console.WriteLine("\nAll vegetables in this Salad:");
             foreach(var str in salad.ShowAllVegetablesInSeled)
             {
                 Console.WriteLine(str.VegetableName);
             }
-           
-
+            
             Console.WriteLine("\n\tSort by Name:");
             foreach (var str in salad.SortByName)
             {
@@ -53,15 +56,15 @@ namespace Task1
             Console.WriteLine("\n\tSort by Weight:");
             foreach (var str in salad.SortByWeight)
             {
-                Console.WriteLine("{0} = {1} gramm", str.VegetableName, str.VegetableWeight);
+                Console.WriteLine("{0} = {1} gram", str.VegetableName, str.VegetableWeight);
             }
 
             Console.WriteLine("\n\tSearch by calories from {0} to {1}", min, max);
-            foreach (var str in salad.CompareByCaloricity(min,max))
+            foreach (var str in salad.SearchByCaloricity(min,max))
             {
                 Console.WriteLine("{0}={1}",str.VegetableName,str.VegetableCaloricity);
             }
-            salad.CompareByCaloricity(min, max);
+
             Console.WriteLine("\nSum of calories in {1} salad = {0} callories", salad.CaloricitySumm, salad.Name);
 
         }
