@@ -47,12 +47,14 @@
     <Compile Include="Classes\Word.cs" />
     <Compile Include="Interfaces\IRow.cs" />
     <Compile Include="Interfaces\ISentenceItem.cs" />
+    <Compile Include="Interfaces\IText.cs" />
     <Compile Include="Interfaces\IWord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

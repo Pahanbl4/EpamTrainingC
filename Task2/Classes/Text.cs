@@ -7,23 +7,59 @@ using Task2.Interfaces;
 
 namespace Task2.Classes
 {
-  public  class Text
+  public  class Text :IText
     {
-        public List<ISentenceItem> Rows { get; private set; }
+        private List<Row> _content;
 
-        public Text(List<ISentenceItem> rows)
+        public string Content
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var s in _content)
+                {
+                    sb.Append(s.Content);
+                    sb.Append("\r\n");
+                }
+                return sb.ToString();
+
+            }
+        }
+
+        public override string ToString()
+        {
+            return Content ;
+        }
+
+        public int Length
+        {
+            get
+            { return (_content != null) ? Content.Length : 0; }
+        }
+
+        public Text(List<Row> rows)
         {    
-         Rows = rows;
+         _content = rows;
         }
 
         public Text()
         {
-            Rows = new List<ISentenceItem>();
+            _content = new List<Row>();
         }
 
         public void AddRows(Row row)
         {
-            Rows.Add(row);
+            _content.Add(row);
+        }
+
+        public void RemoveRows(Row row)
+        {
+            _content.Remove(row);
+        }
+
+        public void RemoveRows(int rowNumber)
+        {
+            RemoveRows(_content.Find(r=>r.RowNumber==rowNumber));
         }
     }
 }

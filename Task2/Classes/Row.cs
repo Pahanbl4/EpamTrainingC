@@ -37,7 +37,7 @@ namespace Task2.Classes
             _content = new List<ISentenceItem>();
         }
 
-        public Row(int rowNumber,List<ISentenceItem> content)
+        public Row(int rowNumber,IList<ISentenceItem> content)
         {
             RowNumber = rowNumber;
             _content = content;

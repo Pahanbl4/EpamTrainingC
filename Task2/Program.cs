@@ -14,7 +14,7 @@ namespace Task2
         {
 
            //string str = "\tThis phone weri big : 12141349876   \t\tResource not available\r\nfor anonymous access.";
-           //Text text = new Text(str);
+          // Text text = new Text(str);
             Row row = new Row(1);
             
             row.Add(new Word("Aaa"));
