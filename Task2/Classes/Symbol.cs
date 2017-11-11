@@ -36,5 +36,9 @@ namespace Task2.Classes
             get { return _content!=null && _content.Length >= 1 && char.IsLetter(_content[0]) && char.IsLower(_content[0]); }
         }
 
+        public int Length
+        {
+             get { return _content.Length; }
+        }
     }
 }

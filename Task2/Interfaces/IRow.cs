@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task2.Interfaces
 {
-    public interface IRow:ISentenceItem
+    public interface IRow
     {
         int Length { get; }
     }

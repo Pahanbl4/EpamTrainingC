@@ -15,15 +15,43 @@ namespace Task2
 
            //string str = "\tThis phone weri big : 12141349876   \t\tResource not available\r\nfor anonymous access.";
           // Text text = new Text(str);
-            Row row = new Row(1);
+            Row row1 = new Row(1);
             
-            row.Add(new Word("Aaa"));
-            row.Add(new Symbol(" "));
-            row.Add(new Word("bbb"));
-           
-            Console.WriteLine(row.Content);
-            Console.WriteLine(row.Length);
-           // Console.WriteLine(text);
+            row1.Add(new Word("Aaa"));
+            row1.Add(new Symbol(" "));
+            row1.Add(new Word("bbb"));
+
+            Row row2 = new Row(2);
+
+            row2.Add(new Word("Ccc"));
+            row2.Add(new Symbol(" "));
+            row2.Add(new Word("ddd"));
+            row2.Add(new Symbol("."));
+
+            Row row3 = new Row(3);
+            
+            row3.Add(new Word("Eee"));
+            row3.Add(new Symbol(" "));
+            row3.Add(new Word("fff"));
+            row3.Add(new Symbol("."));
+
+            Text txt = new Text();
+
+            txt.AddRows(row1);
+            txt.AddRows(row2);
+            txt.AddRows(row3);
+            
+            Console.WriteLine(txt);
+            Console.WriteLine(txt.Length);
+            
+            txt.RemoveRows(2);
+            
+            Console.WriteLine(txt);
+            Console.WriteLine(txt.Length);
+
+            //  Console.WriteLine(row.Content);
+            // Console.WriteLine(row.Length);
+            // Console.WriteLine(text);
         }
     }
 }

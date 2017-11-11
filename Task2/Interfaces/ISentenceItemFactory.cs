@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task2.Interfaces
 {
-   public interface IText
+   public interface ISentenceItemFactory
     {
-        int Length { get; }
+        ISentenceItem Create(string chars);
     }
 }

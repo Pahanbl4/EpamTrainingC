@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task2.Interfaces
 {
-   public interface IText
+   public interface IPunctuation : ISentenceItem
     {
-        int Length { get; }
+        Symbol Value { get; }
     }
 }
