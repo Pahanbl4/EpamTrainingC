@@ -9,47 +9,58 @@ namespace Task2.Classes
 {
   public  class Word:IWord
     {
-        public Symbol[] _content;
-        public Word(IEnumerable<Symbol> source)
+        private Symbol[] _content;
+
+        public Symbol this[int index]
+        {
+            get { return _content[index]; }
+        }
+
+        public Symbol[] Content
          {
-             _content = source.ToArray();
+            get { return _content; }
+            private set { _content = value; }
          }
  
-         public Word(string chars)
+         public int Length
          {
-             Content = chars;
+            get { return (_content != null) ? _content.Length : 0; }
+          
          }
  
-         public Symbol this[int index]
-         {
-             get { return _content[index]; }
-         }
+        
  
-         public string Content
-         {
-             get
-             {
-                 StringBuilder sb = new StringBuilder();
-                 foreach (var s in _content)
-                 {
-                     sb.Append(s.Content);
-                 }
-                return sb.ToString();
-             }
-             private set
-             {
-                 if (value != null)
-                 {
-                     _content = value.Select(x => new Symbol(x)).ToArray();
-                 }
-                 else
-                 {
-                     _content = null;
-                 }
-             }
-         }
- 
-         public IEnumerator<Symbol> GetEnumerator()
+        public int Row { get; private set; }
+
+        public string Chars
+        {
+            get { return ToString(); }
+        }
+
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(var l in Content)
+            {
+                sb.Append(l.ToString());
+            }
+            return sb.ToString();
+        }
+
+        public Word(IEnumerable<Symbol> source, int row)
+          {
+            Row = row;
+            Content = source.ToArray();
+          }
+
+        public Word(string chars, int row)
+          {
+            Content = chars.Select(x => new Symbol(x)).ToArray();
+            Row = row;
+          }
+
+        public IEnumerator<Symbol> GetEnumerator()
          {
              return _content.AsEnumerable().GetEnumerator();
          }
@@ -58,12 +69,7 @@ namespace Task2.Classes
          {
              return _content.GetEnumerator();
          }
- 
- 
-         public int Length
-        {
-             get { return (_content != null) ? _content.Length : 0; }
-         }
+
      }
     }
 

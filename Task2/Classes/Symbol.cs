@@ -40,5 +40,14 @@ namespace Task2.Classes
         {
              get { return _content.Length; }
         }
+        public string Chars
+        {
+            get { return ToString(); }
+        }
+ 
+         public override string ToString()
+        {
+            return _content;
+        }
     }
 }

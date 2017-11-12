@@ -11,6 +11,11 @@ namespace Task2.Classes
     {
         private List<Sentence> _content;
 
+        public List<Sentence> Content
+        {
+            get { return _content; }
+        }
+
         public string Chars
         {
             get { return ToString(); }

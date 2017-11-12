@@ -37,7 +37,7 @@ namespace Task2.Classes
                   {
                      var currentSentenceString = line.Substring(0, sentenceSeparatorPlace + sentenceSeparator.Length);
                      ParseSentence(currentSentenceString, currentSentence, row);
-                      textResult.Add(currentSentence);
+                      textResult.AddRows(currentSentence);
   
                       currentSentence = new Sentence();
 
@@ -100,7 +100,7 @@ namespace Task2.Classes
                  {
                      sentence.Add(new Word(currentWordString, row));
                  }
-                  sentence.Add(wordSeparator);
+                  sentence.Add(new Punctuation(wordSeparator,row));
  
                  source = source.Substring(index + wordSeparator.Length );
                   wordSeparator = FindSeparator(orderedWordSeparators, source, out index);

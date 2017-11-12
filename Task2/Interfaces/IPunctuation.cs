@@ -10,5 +10,6 @@ namespace Task2.Interfaces
    public interface IPunctuation : ISentenceItem
     {
         Symbol Value { get; }
+        int Row { get; }
     }
 }

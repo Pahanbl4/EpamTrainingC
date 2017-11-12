@@ -8,6 +8,8 @@ namespace Task2.Interfaces
 {
    public interface ISentenceItem
     {
-        string Content { get; }
+      //  string Content { get; }
+        string Chars { get; }
+        int Length { get; }
     }
 }

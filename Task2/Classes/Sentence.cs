@@ -10,6 +10,13 @@ namespace Task2.Classes
 {
     public class Sentence : ISentence
     {
+        private ICollection<ISentenceItem> _items;
+
+        public string Chars
+         {
+             get { return ToString(); }
+         }
+
         public Sentence()
         {
             _items = new List<ISentenceItem>();
@@ -19,14 +26,40 @@ namespace Task2.Classes
         {
             _items = source;
 
+        }       
+        public ICollection<ISentenceItem> Content
+        {
+             get { return _items; }
         }
-
-        private ICollection<ISentenceItem> _items;
 
         public int Count
         {
             get { return _items.Count; }
         }
+
+        public int[] Rows
+         {
+             get
+             {
+                 int rowStart = _items.OfType<Word>().First().Row;
+                 int rowStop = _items.OfType<Word>().Last().Row;
+                 return new[] {rowStart, rowStop};
+             }
+         }
+        public int RowsCount
+         {
+             get { return Rows[1] - Rows[0] + 1; }
+         }
+
+        public int WordCount
+         {
+             get { return _items.OfType<Word>().Count(); }
+         }
+
+        public int Length
+         {
+             get { return Chars.Length; }
+         }
 
         public void Add(ISentenceItem item)
         {
@@ -38,12 +71,7 @@ namespace Task2.Classes
             {
                 throw new NullReferenceException("");
             }
-        }
-
-        public IEnumerator<ISentenceItem> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        }       
 
         public bool Remove(ISentenceItem item)
         {
@@ -57,9 +85,22 @@ namespace Task2.Classes
             }
         }
 
-       
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var s in _items)
+            {
+                sb.Append(s.Chars);
+            }
+            return sb.ToString();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator<ISentenceItem> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }

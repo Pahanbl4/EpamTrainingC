@@ -17,7 +17,7 @@ namespace Task2
             SeparatorContainer sp = new SeparatorContainer();
             Parser parser = new Parser(sp);
             Text text = parser.Parse(textReader);
-            Console.WriteLine(text.ToString());                    
+            Console.WriteLine(text.RowCount);                    
         }
     }
 }
