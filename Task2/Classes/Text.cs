@@ -16,6 +16,14 @@ namespace Task2.Classes
             get { return _content; }
         }
 
+        public ICollection<Sentence> SentancesOrderedDescend
+        {
+             get
+             {
+                 return Content.OrderByDescending(x => x.WordCount).ToList();
+             }
+        }
+
         public string Chars
         {
             get { return ToString(); }
@@ -54,9 +62,7 @@ namespace Task2.Classes
                  sb.Append(s.Chars);
              }
              return sb.ToString();
-        }
-
-       
+        }      
 
         public Text(List<Sentence> rows)
         {    
@@ -78,6 +84,32 @@ namespace Task2.Classes
          return  _content.Remove(sentence);
         }
 
+        public ICollection<Sentence> InterrogativeSentances
+        {
+             get
+             {
+               return Content.FindAll(x => x.Content.Last().Chars.Contains("?")).ToList();
+             }
+        }
+ 
+        public List<string> InterrogativeSentancesWords()
+        {
+             List<Word> w = new List<Word>();
+ 
+             foreach (var sentance in InterrogativeSentances)
+             {
+                 w.AddRange(sentance.Words);
+             }
+ 
+             return w.OrderBy(x => x.Chars).Select(i => i.Chars).Distinct().ToList();
+        }
+ 
+        public List<string> InterrogativeSentancesWords(int length)
+        {
+             var interrogativeWords = InterrogativeSentancesWords();
+             var v =  interrogativeWords.FindAll(x => x.Length == length);
+             return interrogativeWords.FindAll(x => x.Length == length);
+        }
        
     }
 }

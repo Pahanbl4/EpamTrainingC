@@ -37,7 +37,6 @@ namespace Task2.Classes
             get { return ToString(); }
         }
 
-        string ISentenceItem.Content => throw new NotImplementedException();
 
         public override string ToString()
         {

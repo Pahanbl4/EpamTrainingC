@@ -13,9 +13,9 @@ namespace Task2.Classes
         private ICollection<ISentenceItem> _items;
 
         public string Chars
-         {
-             get { return ToString(); }
-         }
+        {
+            get { return ToString(); }
+        }
 
         public Sentence()
         {
@@ -32,34 +32,39 @@ namespace Task2.Classes
              get { return _items; }
         }
 
+        public ICollection<Word> Words
+        {
+            get { return Content.OfType<Word>().ToList(); }
+        }
+
         public int Count
         {
             get { return _items.Count; }
         }
 
         public int[] Rows
-         {
+        {
              get
              {
                  int rowStart = _items.OfType<Word>().First().Row;
                  int rowStop = _items.OfType<Word>().Last().Row;
                  return new[] {rowStart, rowStop};
              }
-         }
+        }
         public int RowsCount
-         {
+        {
              get { return Rows[1] - Rows[0] + 1; }
-         }
+        }
 
         public int WordCount
-         {
-             get { return _items.OfType<Word>().Count(); }
-         }
+        {
+             get { return Words.Count(); }
+        }
 
         public int Length
-         {
+        {
              get { return Chars.Length; }
-         }
+        }
 
         public void Add(ISentenceItem item)
         {
