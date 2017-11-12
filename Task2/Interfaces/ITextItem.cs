@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Task2.Interfaces
 {
-    interface ISentenceItem:ITextItem
+   public interface ITextItem
     {
-        int Row { get; }
+      //  string Content { get; }
+        string Chars { get; }
+        int Length { get; }
     }
 }

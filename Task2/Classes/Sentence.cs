@@ -10,7 +10,7 @@ namespace Task2.Classes
 {
     public class Sentence : ISentence
     {
-        private ICollection<ISentenceItem> _items;
+        private List<ITextItem> _items;
 
         public string Chars
         {
@@ -19,20 +19,20 @@ namespace Task2.Classes
 
         public Sentence()
         {
-            _items = new List<ISentenceItem>();
+            _items = new List<ITextItem>();
         }
 
-        public Sentence(ICollection<ISentenceItem> source)
+        public Sentence(List<ITextItem> source)
         {
             _items = source;
 
         }       
-        public ICollection<ISentenceItem> Content
+        public List<ITextItem> Content
         {
              get { return _items; }
         }
 
-        public ICollection<Word> Words
+        public List<Word> Words
         {
             get { return Content.OfType<Word>().ToList(); }
         }
@@ -66,7 +66,7 @@ namespace Task2.Classes
              get { return Chars.Length; }
         }
 
-        public void Add(ISentenceItem item)
+        public void Add(ITextItem item)
         {
             if (item != null)
             {
@@ -78,7 +78,7 @@ namespace Task2.Classes
             }
         }       
 
-        public bool Remove(ISentenceItem item)
+        public bool Remove(ITextItem item)
         {
             if(item!=null)
             {
@@ -100,7 +100,7 @@ namespace Task2.Classes
             return sb.ToString();
         }
 
-        public IEnumerator<ISentenceItem> GetEnumerator()
+        public IEnumerator<ITextItem> GetEnumerator()
         {
             return _items.GetEnumerator();
         }

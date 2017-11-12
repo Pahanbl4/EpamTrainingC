@@ -7,7 +7,7 @@ using Task2.Classes;
 
 namespace Task2.Interfaces
 {
-   public interface IText:ISentenceItem
+   public interface IText:ITextItem
     {
          int SentenceCount { get; }
          int WordCount { get; }

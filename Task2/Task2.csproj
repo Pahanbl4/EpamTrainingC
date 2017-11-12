@@ -51,6 +51,7 @@
     <Compile Include="Interfaces\IPunctuation.cs" />
     <Compile Include="Interfaces\ISentence.cs" />
     <Compile Include="Interfaces\ISentenceItem.cs" />
+    <Compile Include="Interfaces\ITextItem.cs" />
     <Compile Include="Interfaces\IText.cs" />
     <Compile Include="Interfaces\IWord.cs" />
     <Compile Include="Program.cs" />

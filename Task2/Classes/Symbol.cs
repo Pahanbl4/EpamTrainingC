@@ -7,7 +7,7 @@ using Task2.Interfaces;
 
 namespace Task2.Classes
 {
-  public  class Symbol:ISentenceItem
+  public  class Symbol:ITextItem
     {
         private string _content;
 
