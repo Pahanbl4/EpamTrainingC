@@ -11,8 +11,6 @@ namespace Task2.Classes
         private Symbol[] sentenceSeparators = new Symbol[] { new Symbol("?"),
                                                              new Symbol("!"),
                                                              new Symbol("."),
-                                                             new Symbol(".\n"),
-                                                             new Symbol(".\n\r"),
                                                              new Symbol(".\r\n"),
                                                              new Symbol("..."),
                                                              new Symbol("?!")
@@ -20,6 +18,9 @@ namespace Task2.Classes
         private Symbol[] wordSeparators = new Symbol[] { new Symbol(" "),
                                                          new Symbol(" - "),
                                                          new Symbol(", "),
+                                                         new Symbol(",\r\n"),
+                                                         new Symbol("; "),
+                                                         new Symbol(";\r\n"),
                                                          new Symbol(": "),
                                                          new Symbol(":\n\r"),
                                                          new Symbol(":\r\n"),
@@ -30,7 +31,8 @@ namespace Task2.Classes
                                                          new Symbol("); "),
                                                          new Symbol("):"),
                                                          new Symbol("\""),
-                                                         new Symbol("/")
+                                                         new Symbol("/"),
+                                                         new Symbol("\r\n")
                                                           };
 
         public IEnumerable<Symbol> SentenceSeparators()

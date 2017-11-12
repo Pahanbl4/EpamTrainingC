@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -102,7 +103,7 @@ namespace Task2.Classes
         public List<Word> InterrogativeSentancesWordsDistinct()
         {
             return InterrogativeSentancesWords()
-                     .GroupBy(o => o.Chars)
+                     .GroupBy(o => o.Chars, StringComparer.InvariantCultureIgnoreCase)
                      .Select(o => o.FirstOrDefault())
                      .ToList();
         }
@@ -148,7 +149,10 @@ namespace Task2.Classes
          {
              get
              {
-                 return Content.SelectMany(s => s.Words).OrderBy(word => word.Chars).ToList();
+                 return Content
+                    .SelectMany(s => s.Words)
+                    .OrderBy(word => word.Chars)
+                    .ToList();
              }
          }
  
@@ -157,7 +161,7 @@ namespace Task2.Classes
              get
              {
                  return Words
-                         .GroupBy(o => o.Chars)
+                         .GroupBy(o => o.Chars, StringComparer.InvariantCultureIgnoreCase)
                          .Select(o => o.FirstOrDefault())
                          .ToList();
              }
@@ -194,14 +198,30 @@ namespace Task2.Classes
 
         public void PrintConcordances()
         {
+             var currentChar = Char.ToUpper( Concordances.First().Key[0] );
+             Console.WriteLine(currentChar);
              foreach (var c in Concordances)
              {
+                 var tempChar = Char.ToUpper( c.Key[0] );
+                 if (currentChar != tempChar)
+                 {
+                     currentChar = tempChar;
+                     Console.WriteLine(currentChar);
+                 }
                  Console.Write("{0,15} | {1,3} | ",c.Key ,c.Value[0][0]);
                  foreach (var i in c.Value[1])
                  {
                      Console.Write("{0} ",i);
                  }
                  Console.Write("\n");
+             }
+        }
+
+        public void ToFile(string path)
+        {
+             using (StreamWriter file = new StreamWriter(path))
+             {
+                 file.WriteLine(this.Chars);
              }
         }
 
