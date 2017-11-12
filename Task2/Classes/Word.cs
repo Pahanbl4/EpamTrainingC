@@ -34,18 +34,15 @@ namespace Task2.Classes
 
         public string Chars
         {
-            get { return ToString(); }
-        }
-
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach(var l in Content)
+            get
             {
-                sb.Append(l.ToString());
+                StringBuilder sb = new StringBuilder();
+                 foreach (var item in Content)
+                 {
+                     sb.Append(item.Chars);
+                 }
+                 return sb.ToString();
             }
-            return sb.ToString();
         }
 
         public Word(IEnumerable<Symbol> source, int row)

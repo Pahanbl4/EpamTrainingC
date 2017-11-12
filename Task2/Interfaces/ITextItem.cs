@@ -8,7 +8,6 @@ namespace Task2.Interfaces
 {
    public interface ITextItem
     {
-      //  string Content { get; }
         string Chars { get; }
         int Length { get; }
     }

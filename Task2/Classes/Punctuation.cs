@@ -10,41 +10,28 @@ namespace Task2.Classes
   public  class Punctuation:IPunctuation
     {
         private Symbol _content;
-         public string Content
+        public int Row { get; private set; }
+
+        public Symbol Content
          {
              get
              {
-                 return _content.Content;
+                 return _content;
              }
              private set
              {
-                 _content = new Symbol(value);
+                 _content = value;
              }
          }
  
          public int Length
          {
-             get
-             {
-                 return Content.Length;
-             }
-         }
- 
-         public int Row { get; private set; }
- 
-         public Symbol Value
-         {
-             get { return _content; }
-         }
+             get {return Content.Length;}
+         }      
  
          public string Chars
          {
-             get { return ToString(); }
-         }
- 
-         public override string ToString()
-         {
-             return _content.ToString();
+             get { return Content.Chars; }
          }
  
          public Punctuation(Symbol content, int row)

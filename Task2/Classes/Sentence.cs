@@ -10,28 +10,37 @@ namespace Task2.Classes
 {
     public class Sentence : ISentence
     {
-        private List<ITextItem> _items;
+        private List<ISentenceItem> _items;
 
-        public string Chars
+        public List<ISentenceItem> Content
         {
-            get { return ToString(); }
+            get { return _items; }
         }
 
         public Sentence()
         {
-            _items = new List<ITextItem>();
+            _items = new List<ISentenceItem>();
         }
 
-        public Sentence(List<ITextItem> source)
+        public Sentence(List<ISentenceItem> source)
         {
             _items = source;
 
-        }       
-        public List<ITextItem> Content
-        {
-             get { return _items; }
         }
 
+        public string Chars
+        {
+            get
+             {
+                 StringBuilder sb = new StringBuilder();
+                 foreach (var item in Content)
+                 {
+                     sb.Append(item.Chars);
+                 }
+                 return sb.ToString();
+             }
+          }
+             
         public List<Word> Words
         {
             get { return Content.OfType<Word>().ToList(); }
@@ -66,7 +75,7 @@ namespace Task2.Classes
              get { return Chars.Length; }
         }
 
-        public void Add(ITextItem item)
+        public void Add(ISentenceItem item)
         {
             if (item != null)
             {
@@ -78,7 +87,7 @@ namespace Task2.Classes
             }
         }       
 
-        public bool Remove(ITextItem item)
+        public bool Remove(ISentenceItem item)
         {
             if(item!=null)
             {
@@ -89,16 +98,20 @@ namespace Task2.Classes
                 throw new NullReferenceException("");
             }
         }
-
-        public override string ToString()
+        public void Replace(int length, string subString)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var s in _items)
-            {
-                sb.Append(s.Chars);
-            }
-            return sb.ToString();
-        }
+            SeparatorContainer sp = new SeparatorContainer();
+             Parser parser = new Parser(sp);
+ 
+             var words = Words.FindAll(w => w.Length == length);
+             foreach (var word in words)
+             {
+                 var subSentence = parser.Parse(subString, word.Row);
+                 var index = _items.IndexOf(word);
+                 Remove(word);
+                 _items.InsertRange(index, subSentence);
+             }
+         }
 
         public IEnumerator<ITextItem> GetEnumerator()
         {

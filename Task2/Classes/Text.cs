@@ -26,12 +26,12 @@ namespace Task2.Classes
         {
             _content = new List<Sentence>();
         }
-
-        public List<Sentence> SentancesOrderedDescend
+        // All sentences given text in ascending order of the number of words in each of them
+        public List<Sentence> SentancesOrderedByWordCount
         {
              get
              {
-                 return Content.OrderByDescending(x => x.WordCount).ToList();
+                 return Content.OrderBy(x => x.WordCount).ToList();
              }
         }
 
@@ -45,7 +45,15 @@ namespace Task2.Classes
 
         public string Chars
         {
-            get { return ToString(); }
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                 foreach (var s in _content)
+                 {
+                     sb.Append(s.Chars);
+                 }
+                 return sb.ToString();
+            }
         }
 
         public int SentenceCount
@@ -73,16 +81,6 @@ namespace Task2.Classes
               }
           }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-             foreach (var s in _content)
-             {
-                 sb.Append(s.Chars);
-             }
-             return sb.ToString();
-        }      
-
         public void AddRows(Sentence sentence)
         {
             _content.Add(sentence);
@@ -95,22 +93,30 @@ namespace Task2.Classes
  
         public List<Word> InterrogativeSentancesWords()
         {
-            return InterrogativeSentances.SelectMany(x => x.Words).ToList();
+            return InterrogativeSentances
+                     .SelectMany(x => x.Words)
+                     .OrderBy(word => word.Chars)
+                     .ToList();
         }
  
-        public List<Word> InterrogativeSentancesWordsDestinct()
+        public List<Word> InterrogativeSentancesWordsDistinct()
         {
-             return InterrogativeSentancesWords().Distinct().ToList();
+            return InterrogativeSentancesWords()
+                     .GroupBy(o => o.Chars)
+                     .Select(o => o.FirstOrDefault())
+                     .ToList();
         }
 
         public List<Word> InterrogativeSentancesWords(int length)
         {
-             return InterrogativeSentancesWords().FindAll(x => x.Length == length).Distinct().ToList();
+            return InterrogativeSentancesWords()
+                .FindAll(x => x.Length == length);
         }
 
         public List<Word> InterrogativeSentancesWordsDistinct(int length)
         {
-             return InterrogativeSentancesWordsDestinct().FindAll(x => x.Length == length).ToList();
+            return InterrogativeSentancesWordsDistinct()
+                     .FindAll(x => x.Length == length);
         }
 
         public void RemoveWords(int length, char startChar)
@@ -125,24 +131,79 @@ namespace Task2.Classes
              }
           }
 
-       // Remove all words of the specified length and match to the rule
-        public void RemoveWords(int length, Regex rule)
-         {
+        // From the text remove all words of a given length, beginning with a consonant letter.
+        public void RemoveConsonantWords(int length)
+        {
              foreach (var sentence in Content)
              {
-                 var words = sentence.Words.FindAll(x => rule.IsMatch( x.Chars ) && x.Length == length);
+                 var words = sentence.Words.FindAll(x => !x[0].IsVowel && x.Length == length);
                  foreach (var w in words)
                  {
                      sentence.Remove(w);
                  }
              }
          }
-        // From the text remove all words of a given length, beginning with a consonant letter.
-        public void RemoveConsonantWords(int length)
+
+        public ICollection<Word> Words
          {
-             var rule = new Regex(@"\b[qwrtpsdfghklzxcvbnm]\S+\b", RegexOptions.IgnoreCase);
-             RemoveWords(length, rule);
+             get
+             {
+                 return Content.SelectMany(s => s.Words).OrderBy(word => word.Chars).ToList();
+             }
          }
+ 
+         public ICollection<Word> WordsDistinct
+         {
+             get
+             {
+                 return Words
+                         .GroupBy(o => o.Chars)
+                         .Select(o => o.FirstOrDefault())
+                         .ToList();
+             }
+         }
+
+        public IDictionary<string, int[][]> Concordances
+         {
+             get
+             {
+                 int[] amount;
+                 int[] row;
+ 
+                 var d = new Dictionary<string, int[][]>();
+                 var words = this.WordsDistinct;
+                 foreach(var word in words)
+                 {
+
+                     var wordOccurrences = Content.SelectMany(s => s.Words).ToList().FindAll(w => w.Chars == word.Chars);
+                     amount = new int[] {wordOccurrences.Count()};
+                     row = wordOccurrences.Select(s => s.Row).Distinct().ToArray();
+                     
+                     try
+                     {
+                         d.Add(word.Chars, new int[2][] { amount, row });
+                     }
+                     catch (ArgumentException)
+                     {
+                         Console.WriteLine("An element already exists.");
+                     }
+                 }
+                 return d;
+             }
+         }
+
+        public void PrintConcordances()
+        {
+             foreach (var c in Concordances)
+             {
+                 Console.Write("{0,15} | {1,3} | ",c.Key ,c.Value[0][0]);
+                 foreach (var i in c.Value[1])
+                 {
+                     Console.Write("{0} ",i);
+                 }
+                 Console.Write("\n");
+             }
+        }
 
 }
 }

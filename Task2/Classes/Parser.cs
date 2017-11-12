@@ -53,6 +53,12 @@ namespace Task2.Classes
               }
               return textResult;
          }
+        public ICollection<ISentenceItem> Parse(string String, int row)
+        {
+             Sentence currentSentence = new Sentence();
+             ParseSentence(String, currentSentence, row);
+             return currentSentence.Content;
+        }
 
         private string RemoveWS(string source)
         {

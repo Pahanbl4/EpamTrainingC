@@ -7,9 +7,9 @@ using Task2.Classes;
 
 namespace Task2.Interfaces
 {
-    interface IWord:ITextItem,IEnumerable<Symbol>
+    interface IWord:ISentenceItem,IEnumerable<Symbol>
     {
         Symbol this[int index] { get; }
-   
+        Symbol[] Content { get; }
     }
 }

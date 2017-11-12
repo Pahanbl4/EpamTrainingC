@@ -7,9 +7,8 @@ using Task2.Classes;
 
 namespace Task2.Interfaces
 {
-   public interface IPunctuation : ITextItem
+   public interface IPunctuation : ISentenceItem
     {
-        Symbol Value { get; }
-        int Row { get; }
+        Symbol Content { get; }
     }
 }

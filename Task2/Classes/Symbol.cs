@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Task2.Interfaces;
 
 namespace Task2.Classes
 {
-  public  class Symbol:ITextItem
+  public  class Symbol
     {
         private string _content;
 
@@ -36,18 +37,22 @@ namespace Task2.Classes
             get { return _content!=null && _content.Length >= 1 && char.IsLetter(_content[0]) && char.IsLower(_content[0]); }
         }
 
+        public bool IsVowel 
+        {
+             get
+             {
+                 var rule = new Regex("[aeiou]", RegexOptions.IgnoreCase);
+                 return rule.IsMatch(_content);
+             }
+        }
+
         public int Length
         {
              get { return _content.Length; }
         }
         public string Chars
         {
-            get { return ToString(); }
-        }
- 
-         public override string ToString()
-        {
-            return _content;
+            get { return _content; }
         }
     }
 }

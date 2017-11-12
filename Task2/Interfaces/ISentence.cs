@@ -8,8 +8,8 @@ namespace Task2.Interfaces
 {
    public interface ISentence :ITextItem, IEnumerable<ITextItem>
     {
-        void Add(ITextItem item);
-        bool Remove(ITextItem item);
+        void Add(ISentenceItem item);
+        bool Remove(ISentenceItem item);
         int Count { get; }
         int WordCount { get; }
     }

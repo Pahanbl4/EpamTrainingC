@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task2.Interfaces
 {
-    interface ISentenceItem:ITextItem
+  public  interface ISentenceItem:ITextItem
     {
         int Row { get; }
     }
