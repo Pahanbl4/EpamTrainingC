@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Task2.Interfaces;
 
@@ -123,8 +124,25 @@ namespace Task2.Classes
                  }
              }
           }
-        }
 
+       // Remove all words of the specified length and match to the rule
+        public void RemoveWords(int length, Regex rule)
+         {
+             foreach (var sentence in Content)
+             {
+                 var words = sentence.Words.FindAll(x => rule.IsMatch( x.Chars ) && x.Length == length);
+                 foreach (var w in words)
+                 {
+                     sentence.Remove(w);
+                 }
+             }
+         }
+        // From the text remove all words of a given length, beginning with a consonant letter.
+        public void RemoveConsonantWords(int length)
+         {
+             var rule = new Regex(@"\b[qwrtpsdfghklzxcvbnm]\S+\b", RegexOptions.IgnoreCase);
+             RemoveWords(length, rule);
+         }
 
-    
+}
 }

@@ -21,6 +21,9 @@ namespace Task2
             // Console.WriteLine(text.Length);
             Console.WriteLine(text.SentancesOrderedDescend);
             Console.WriteLine(text.InterrogativeSentancesWords(3));
+            text.RemoveWords(3, 't');
+            text.RemoveConsonantWords(3);
+
         }
     }
 }
