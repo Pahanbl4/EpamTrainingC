@@ -9,57 +9,70 @@ namespace Task2.Classes
 {
   public  class Text :IText
     {
-        private List<Row> _content;
+        private List<Sentence> _content;
 
-        public string Content
+        public string Chars
         {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (var s in _content)
-                {
-                    sb.Append(s.Content);
-                    sb.Append("\r\n");
-                }
-                return sb.ToString();
-
-            }
+            get { return ToString(); }
         }
 
-        public override string ToString()
-        {
-            return Content ;
-        }
+        public int SentenceCount
+         {
+             get { return _content.Count; }
+         }
 
         public int Length
         {
-            get
-            { return (_content != null) ? Content.Length : 0; }
+            get { return Chars.Length; }
         }
 
-        public Text(List<Row> rows)
+        public int RowCount
+          {
+             get
+             {
+                 return _content.LastOrDefault().Rows[1];
+             }
+         }
+        public int WordCount
+          {
+              get
+              {
+                return _content.Sum(s => s.WordCount);
+              }
+          }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+             foreach (var s in _content)
+             {
+                 sb.Append(s.Chars);
+             }
+             return sb.ToString();
+        }
+
+       
+
+        public Text(List<Sentence> rows)
         {    
          _content = rows;
         }
 
         public Text()
         {
-            _content = new List<Row>();
+            _content = new List<Sentence>();
         }
 
-        public void AddRows(Row row)
+        public void AddRows(Sentence sentence)
         {
-            _content.Add(row);
+            _content.Add(sentence);
         }
 
-        public void RemoveRows(Row row)
+        public bool RemoveRows(Sentence sentence)
         {
-            _content.Remove(row);
+         return  _content.Remove(sentence);
         }
 
-        public void RemoveRows(int rowNumber)
-        {
-            RemoveRows(_content.Find(r=>r.RowNumber==rowNumber));
-        }
+       
     }
 }

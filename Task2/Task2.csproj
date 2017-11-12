@@ -42,21 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Parser.cs" />
-    <Compile Include="Classes\Punctuation.cs" />
-    <Compile Include="Classes\PunctuationFactory.cs" />
-    <Compile Include="Classes\Row.cs" />
     <Compile Include="Classes\Sentence.cs" />
-    <Compile Include="Classes\SentenceItemFactory.cs" />
     <Compile Include="Classes\SeparatorContainer.cs" />
     <Compile Include="Classes\Symbol.cs" />
     <Compile Include="Classes\Text.cs" />
     <Compile Include="Classes\Word.cs" />
-    <Compile Include="Classes\WordFactory.cs" />
     <Compile Include="Interfaces\IPunctuation.cs" />
-    <Compile Include="Interfaces\IRow.cs" />
     <Compile Include="Interfaces\ISentence.cs" />
     <Compile Include="Interfaces\ISentenceItem.cs" />
-    <Compile Include="Interfaces\ISentenceItemFactory.cs" />
     <Compile Include="Interfaces\IText.cs" />
     <Compile Include="Interfaces\IWord.cs" />
     <Compile Include="Program.cs" />

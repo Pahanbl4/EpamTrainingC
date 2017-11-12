@@ -14,6 +14,7 @@ namespace Task2.Classes
                                                              new Symbol(".\n"),
                                                              new Symbol(".\n\r"),
                                                              new Symbol(".\r\n"),
+                                                             new Symbol("\r\n\r\n"),
                                                              new Symbol("..."),
                                                              new Symbol("?!")
                                                           };
