@@ -47,7 +47,7 @@ namespace Task2
              Console.WriteLine("----------------------------");
 
            //"В некотором предложении текста слова заданной длины заменить указанной подстрокой, длина которой может не совпадать с длиной слова."
-            text.Content[1].Replace(3, "bla bla bla, bla");
+            text.Content[10].Replace(6, "YOYOYOYO, YOYOYOYO");
 
             var c = text.Concordances;
             text.PrintConcordances();

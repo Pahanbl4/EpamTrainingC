@@ -91,7 +91,7 @@ namespace Task2.Classes
         {
          return  _content.Remove(sentence);
         }
- 
+ //all words ?interrogative sentence in the word
         public List<Word> InterrogativeSentancesWords()
         {
             return InterrogativeSentances
@@ -107,7 +107,7 @@ namespace Task2.Classes
                      .Select(o => o.FirstOrDefault())
                      .ToList();
         }
-
+        //all ?interrogative sentence in the word length
         public List<Word> InterrogativeSentancesWords(int length)
         {
             return InterrogativeSentancesWords()
@@ -120,6 +120,7 @@ namespace Task2.Classes
                      .FindAll(x => x.Length == length);
         }
 
+        // delete words specifite length and start from simbol
         public void RemoveWords(int length, char startChar)
         {
             foreach (var sentence in Content)
@@ -132,7 +133,7 @@ namespace Task2.Classes
              }
           }
 
-        // From the text remove all words of a given length, beginning with a consonant letter.
+        // delete Consonant words
         public void RemoveConsonantWords(int length)
         {
              foreach (var sentence in Content)

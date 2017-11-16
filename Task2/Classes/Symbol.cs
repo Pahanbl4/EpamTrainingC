@@ -18,6 +18,16 @@ namespace Task2.Classes
             set { _content = value; }
         }
 
+        public string Chars
+        {
+            get { return _content; }
+        }
+
+        public int Length
+        {
+            get { return _content.Length; }
+        }
+
         public Symbol(string Sourse)
         {
             _content = Sourse;
@@ -46,13 +56,7 @@ namespace Task2.Classes
              }
         }
 
-        public int Length
-        {
-             get { return _content.Length; }
-        }
-        public string Chars
-        {
-            get { return _content; }
-        }
+       
+       
     }
 }
