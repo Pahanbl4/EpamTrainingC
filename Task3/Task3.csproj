@@ -41,17 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AnswerEventArgs.cs" />
+    <Compile Include="Classes\ATS.cs" />
+    <Compile Include="Classes\CallEventArgs.cs" />
     <Compile Include="Classes\PhoneNumber.cs" />
-    <Compile Include="Classes\PortStatus.cs" />
-    <Compile Include="Interfaces\IClearEventHandlers.cs" />
+    <Compile Include="Classes\Port.cs" />
+    <Compile Include="Classes\StatusCall.cs" />
+    <Compile Include="Classes\StatusPort.cs" />
+    <Compile Include="Classes\Terminal.cs" />
     <Compile Include="Interfaces\IPort.cs" />
     <Compile Include="Interfaces\IPhoneStation.cs" />
     <Compile Include="Interfaces\ITerminal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\IncomingCallRequest.cs" />
-    <Compile Include="Requests\Request.cs" />
-    <Compile Include="Responds\Respond.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

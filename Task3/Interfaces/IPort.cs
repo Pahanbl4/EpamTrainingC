@@ -7,11 +7,20 @@ using Task3.Classes;
 
 namespace Task3.Interfaces
 {
-  public  interface IPort: IClearEventHandlers
+  public interface IPort
     {
-        PortStatus Status { get; set; }
-        event EventHandler<PortStatus> StatusChanging;
-        event EventHandler<PortStatus> StatusChanged;
+     
+       
+        bool Connect(Terminal terminal);
+        bool Disconnect(Terminal terminal);
+        void RaiseIncomingCallEvent(int incomingNumber);
+        void RaiseAnswerCallEvent(int outcomingNumber, StatusCall state);
+        void IncomingCall(int incomingNumber);
+        void AnswerCall(int outcomingNumber, StatusCall state);
+
+
+        // event EventHandler<StatusPort> StatusChanging;
+        // event EventHandler<StatusPort> StatusChanged;
 
     }
 }

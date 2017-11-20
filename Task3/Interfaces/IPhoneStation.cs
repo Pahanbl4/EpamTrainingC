@@ -8,5 +8,31 @@ namespace Task3.Interfaces
 {
     class IPhoneStation
     {
+        public delegate void PushPrinterButton();
+
+        static void Main(string[] args)
+        {
+            mouse mouse = new mouse();
+            mouse.Click += new PushPrinterButton(mouse.Onklick);
+            mouse.StartEvent();
+        }
+
+        class mouse
+        {
+            public event PushPrinterButton Click;
+
+            public void StartEvent()
+            {
+                if (Click != null)
+                {
+                    Onklick();
+                }
+            }
+
+            public void Onklick()
+            {
+                Console.WriteLine("нажата кнопка принт");
+            }
+        }
     }
 }

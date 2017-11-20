@@ -11,6 +11,8 @@ namespace Task2.Classes
     {
         private Symbol[] _content;
 
+        public int Row { get; private set; }
+
         public Symbol this[int index]
         {
             get { return _content[index]; }
@@ -21,17 +23,25 @@ namespace Task2.Classes
             get { return _content; }
             private set { _content = value; }
          }
- 
-         public int Length
+
+        public Word(IEnumerable<Symbol> source, int row)
+        {
+            Row = row;
+            Content = source.ToArray();
+        }
+
+        public Word(string chars, int row)
+        {
+            Content = chars.Select(x => new Symbol(x)).ToArray();
+            Row = row;
+        }
+
+        public int Length
          {
             get { return (_content != null) ? _content.Length : 0; }
           
          }
- 
         
- 
-        public int Row { get; private set; }
-
         public string Chars
         {
             get
@@ -44,18 +54,6 @@ namespace Task2.Classes
                  return sb.ToString();
             }
         }
-
-        public Word(IEnumerable<Symbol> source, int row)
-          {
-            Row = row;
-            Content = source.ToArray();
-          }
-
-        public Word(string chars, int row)
-          {
-            Content = chars.Select(x => new Symbol(x)).ToArray();
-            Row = row;
-          }
 
         public IEnumerator<Symbol> GetEnumerator()
          {

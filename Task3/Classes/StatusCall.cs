@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-    public enum PortStatus
+  public enum StatusCall
     {
-        Free,
-        Busy,
-        UnPlugged//отключен от сети
-
+        Answered,
+        Rejected
     }
 }
