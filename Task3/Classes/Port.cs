@@ -30,12 +30,12 @@ namespace Task3.Classes
         }
         public void AnswerCall(int outcomingNumber, StatusCall state)
         {
-            throw new NotImplementedException();
+            RaiseAnswerCallEvent(outcomingNumber, state);
         }
 
         public bool Connect(Terminal terminal)
         {
-            if(status==StatusPort.UnPlugged)
+            if(status==StatusPort.Busy)
             {
                 status = StatusPort.Free;
                 terminal.CallEvent += _ats.CallingTo;
@@ -49,22 +49,36 @@ namespace Task3.Classes
 
         public bool Disconnect(Terminal terminal)
         {
-            throw new NotImplementedException();
+         if(status==StatusPort.Free)
+            {
+                status = StatusPort.Busy;
+                terminal.CallEvent -= _ats.CallingTo;
+                IncomingCallEvent -= terminal.TakeIncomingCall;
+                flag = false;
+
+            }
+            return flag;
         }
 
         public void IncomingCall(int incomingNumber)
         {
-            throw new NotImplementedException();
+            RaiseIncomingCallEvent(incomingNumber);
         }
 
         public void RaiseAnswerCallEvent(int outcomingNumber, StatusCall state)
         {
-            throw new NotImplementedException();
+            if(PortAnswerEvent!=null)
+            {
+                PortAnswerEvent(this, new AnswerEventArgs(outcomingNumber, 0, state));
+            }
         }
 
         public void RaiseIncomingCallEvent(int incomingNumber)
         {
-            throw new NotImplementedException();
+           if(IncomingCallEvent!=null)
+            {
+                IncomingCallEvent(this, new CallEventArgs(incomingNumber, 0));
+            }
         }
     }
 }

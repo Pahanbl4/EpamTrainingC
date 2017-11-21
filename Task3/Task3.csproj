@@ -50,7 +50,6 @@
     <Compile Include="Classes\StatusPort.cs" />
     <Compile Include="Classes\Terminal.cs" />
     <Compile Include="Interfaces\IPort.cs" />
-    <Compile Include="Interfaces\IPhoneStation.cs" />
     <Compile Include="Interfaces\ITerminal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
