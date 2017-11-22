@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-  public enum StatusCall
+    public enum TariffTypes
     {
-        Answered,// ответил
-        Rejected //скинул
+        Elementary,
+        Standart,
+        Lux
+
+
     }
 }

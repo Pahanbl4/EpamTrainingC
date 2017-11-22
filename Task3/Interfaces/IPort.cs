@@ -13,10 +13,10 @@ namespace Task3.Interfaces
        
         bool Connect(Terminal terminal);
         bool Disconnect(Terminal terminal);
-        void RaiseIncomingCallEvent(int incomingNumber);
-        void RaiseAnswerCallEvent(int outcomingNumber, StatusCall state);
-        void IncomingCall(int incomingNumber);
-        void AnswerCall(int outcomingNumber, StatusCall state);
+        void RaiseIncomingCallEvent(int number, int incomingNumber);
+        void RaiseAnswerCallEvent(int outcomingNumber, int number, StatusCall state);
+        void IncomingCall(int number, int incomingNumber);
+        void AnswerCall(int number, int outcomingNumber, StatusCall state);
 
 
         // event EventHandler<StatusPort> StatusChanging;

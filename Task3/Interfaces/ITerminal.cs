@@ -30,7 +30,7 @@ namespace Task3.Interfaces
         void Call(int number);
         void TakeIncomingCall(object sender, CallEventArgs even);
         void ConnectToPort();
-        void AnswerToCall();
+        void AnswerToCall(int number, StatusCall state);
         void RejectIncomingCall();
         void TakeAnswer(object sender, AnswerEventArgs e);
 

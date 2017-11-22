@@ -28,9 +28,9 @@ namespace Task3.Classes
             status = StatusPort.UnPlugged;
          
         }
-        public void AnswerCall(int outcomingNumber, StatusCall state)
+        public void AnswerCall(int number,int outcomingNumber, StatusCall state)
         {
-            RaiseAnswerCallEvent(outcomingNumber, state);
+            RaiseAnswerCallEvent( number, outcomingNumber, state);
         }
 
         public bool Connect(Terminal terminal)
@@ -60,24 +60,24 @@ namespace Task3.Classes
             return flag;
         }
 
-        public void IncomingCall(int incomingNumber)
+        public void IncomingCall(int number,int incomingNumber)
         {
-            RaiseIncomingCallEvent(incomingNumber);
+            RaiseIncomingCallEvent(number,incomingNumber);
         }
 
-        public void RaiseAnswerCallEvent(int outcomingNumber, StatusCall state)
+        public void RaiseAnswerCallEvent(int outcomingNumber,int number, StatusCall state)
         {
             if(PortAnswerEvent!=null)
             {
-                PortAnswerEvent(this, new AnswerEventArgs(outcomingNumber, 0, state));
+                PortAnswerEvent(this, new AnswerEventArgs(outcomingNumber, number, state));
             }
         }
 
-        public void RaiseIncomingCallEvent(int incomingNumber)
+        public void RaiseIncomingCallEvent(int number,int incomingNumber)
         {
            if(IncomingCallEvent!=null)
             {
-                IncomingCallEvent(this, new CallEventArgs(incomingNumber, 0));
+                IncomingCallEvent(this, new CallEventArgs(number, incomingNumber));
             }
         }
     }

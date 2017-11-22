@@ -44,10 +44,13 @@
     <Compile Include="Classes\AnswerEventArgs.cs" />
     <Compile Include="Classes\ATS.cs" />
     <Compile Include="Classes\CallEventArgs.cs" />
+    <Compile Include="Classes\Contract.cs" />
     <Compile Include="Classes\PhoneNumber.cs" />
     <Compile Include="Classes\Port.cs" />
     <Compile Include="Classes\StatusCall.cs" />
     <Compile Include="Classes\StatusPort.cs" />
+    <Compile Include="Classes\Tariff.cs" />
+    <Compile Include="Classes\TariffTypes.cs" />
     <Compile Include="Classes\Terminal.cs" />
     <Compile Include="Interfaces\IPort.cs" />
     <Compile Include="Interfaces\ITerminal.cs" />

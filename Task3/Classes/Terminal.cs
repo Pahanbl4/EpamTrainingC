@@ -26,29 +26,39 @@ namespace Task3.Classes
           public delegate void AnswerEventHandler(object sender, AnswerEventArgs e);
           public event AnswerEventHandler AnswerEvent;
 
-        public void AnswerToCall()
+        public void AnswerToCall(int number, StatusCall state)
         {
-            throw new NotImplementedException();
+            RaiseAnswerEvent(number, state);
         }
 
-        public void Call(int number)
+        public void Call(int objectNumber)
         {
-            throw new NotImplementedException();
+            RaiseCallEvent(objectNumber);
         }
 
         public void ConnectToPort()
         {
-            throw new NotImplementedException();
+            _terminalPort.Connect(this);
+        }
+        public void TakeIncomingCall(object sender, CallEventArgs even)
+        {
+            Console.WriteLine("Have incoming call at number:{0} to terminal {1}", even.telephoneNumber,even.objectTelephoneNumber);
         }
 
-        public void RaiseAnswerEvent(int number, StatusCall state)
+        public virtual void RaiseAnswerEvent(int incomingNumber, StatusCall state)
         {
-            throw new NotImplementedException();
+           if(AnswerEvent!=null)
+            {
+                AnswerEvent(this, new AnswerEventArgs(incomingNumber, _number, state));
+            }
         }
 
-        public void RaiseCallEvent(int number)
+        public virtual void RaiseCallEvent(int objectNumber)//поднять звонок
         {
-            throw new NotImplementedException();
+            if(CallEvent!=null)
+            {
+                CallEvent(this, new CallEventArgs(_number, objectNumber));
+            }
         }
 
         public void RejectIncomingCall()
@@ -56,14 +66,15 @@ namespace Task3.Classes
             throw new NotImplementedException();
         }
 
-        public void TakeAnswer(object sender, AnswerEventArgs e)
+        public void TakeAnswer(object sender, AnswerEventArgs even)
         {
-            throw new NotImplementedException();
-        }
-
-        public void TakeIncomingCall(object sender, CallEventArgs even)
-        {
-            throw new NotImplementedException();
+            if(even.StatusCall==StatusCall.Answered)
+            {
+                Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", even._objectTelephoneNumber, even._telephoneNumber);
+            }
+            else
+            { Console.WriteLine("Terminal with number: {0}, have rejected on call a number: {1}", even._objectTelephoneNumber, even._telephoneNumber); }
+           
         }
     }
 }
