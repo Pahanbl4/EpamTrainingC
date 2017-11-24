@@ -11,19 +11,30 @@ namespace Task3.Classes
         public string Name { get; private set; }
         public int Number { get; private set; }
         public Tariff Tariff { get; set; }
-        public ATS Ats;
+        public Client Client { get; set; }
+        private DateTime LastTariffUpdate;
 
-        public Terminal RegistrContract()
+        static Random random = new Random();
+
+        public Contract(Client client ,TariffTypes tariffTypes)
         {
-            return Ats.GetNewTerminal(Number); 
+            LastTariffUpdate = DateTime.Now;
+            Client = client;
+            Number = random.Next(1000000, 9999999);
+            Tariff = new Tariff(tariffTypes);
         }
 
-        public Contract(string name, int number, TariffTypes tariffType,ATS ats)
+        public bool TariffChange(TariffTypes tariffTypes)
         {
-            this.Name = name;
-            this.Number = number;
-            this.Tariff = new Tariff(tariffType);
-            this.Ats = ats;
+            if(DateTime.Now.AddMonths(-1)>=LastTariffUpdate)
+            {
+                LastTariffUpdate = DateTime.Now;
+                Tariff = new Tariff(tariffTypes);
+                return true;
+            }
+            return false;
         }
+
+
     }
 }

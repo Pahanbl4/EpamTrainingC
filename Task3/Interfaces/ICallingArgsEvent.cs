@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-  public enum StatusPort
+    public interface ICallingArgsEvent
     {
-        Connect,
-        Disconnect,
-        UnPlugged  //отключен от сети
+        int TelephoneNumber { get; }
+        int ObjectTelephoneNumber { get; }
+        int Id { get; }
     }
 }

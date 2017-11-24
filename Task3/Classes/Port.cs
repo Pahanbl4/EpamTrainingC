@@ -9,76 +9,103 @@ namespace Task3.Classes
 {
     public class Port : IPort
     {
-        public StatusPort status;
-        private ATS _ats;
-        public bool flag;
+        public StatusPort Status;
+  
+        public bool Flag;
 
-        public delegate void PortEventHandler(object sender, CallEventArgs e);
-        public event PortEventHandler IncomingCallEvent;
-        public delegate void PortAnswerEventHandler(object sender, AnswerEventArgs e);
-        public event PortAnswerEventHandler PortAnswerEvent;
+       // public delegate void CallEventHandler(object sender, CallArgsEvent e);
+        public event EventHandler<CallArgsEvent> IncomingCallEvent;
+        // public delegate void AnswerEventHandler(object sender, AnswerArgsEvent e);
+        public event EventHandler<AnswerArgsEvent> PortAnswerEvent;
+        //  public delegate void CallEventHandler(object sender, CallArgsEvent e);
+        public event EventHandler<CallArgsEvent> CallEvent;
+       // public delegate void AnswerEventHandler(object sender, AnswerArgsEvent e);
+        public event EventHandler<AnswerArgsEvent> AnswerEvent;
 
-        public Port(ATS ats)
-        {
-            status = StatusPort.UnPlugged;
-            _ats = ats;
-        }
         public Port()
         {
-            status = StatusPort.UnPlugged;
+            Status = StatusPort.UnPlugged;
          
         }
-        public void AnswerCall(int number,int outcomingNumber, StatusCall state)
-        {
-            RaiseAnswerCallEvent( number, outcomingNumber, state);
-        }
+    
 
         public bool Connect(Terminal terminal)
         {
-            if(status==StatusPort.Busy)
-            {
-                status = StatusPort.Free;
-                terminal.CallEvent += _ats.CallingTo;
-                IncomingCallEvent += terminal.TakeIncomingCall;
-                terminal.AnswerEvent += _ats.AnswerTo;
-                PortAnswerEvent += terminal.TakeAnswer;
-                flag = true;
+            if(Status==StatusPort.Disconnect)
+            {//подписка на событие
+                Status = StatusPort.Connect;
+
+                terminal.CallEvent += CallingTo;            
+                terminal.AnswerEvent += AnswerTo;            
+                Flag = true;
             }
-            return flag;
+            return Flag;
         }
 
         public bool Disconnect(Terminal terminal)
         {
-         if(status==StatusPort.Free)
+         if(Status==StatusPort.Connect)
             {
-                status = StatusPort.Busy;
-                terminal.CallEvent -= _ats.CallingTo;
-                IncomingCallEvent -= terminal.TakeIncomingCall;
-                flag = false;
+                Status = StatusPort.Disconnect;
+                terminal.CallEvent -= CallingTo;
+                terminal.AnswerEvent -= AnswerTo;
+                Flag = false;
 
             }
-            return flag;
+            return Flag;
         }
 
-        public void IncomingCall(int number,int incomingNumber)
+        public void IncomingCall(int number,int objectNumber)
         {
-            RaiseIncomingCallEvent(number,incomingNumber);
+            RaiseIncomingCallEvent(number, objectNumber);
         }
 
-        public void RaiseAnswerCallEvent(int outcomingNumber,int number, StatusCall state)
+        public void AnswerCall(int number, int objectNumber, StatusCall state)
+        {
+            RaiseAnswerCallEvent(number, objectNumber, state);
+        }
+
+        private void CallingTo(object sender, CallArgsEvent even)
+        {
+            RaiseCallingToEvent(even.TelephoneNumber, even.ObjectTelephoneNumber);
+        }
+
+        private void AnswerTo(object sebder, AnswerArgsEvent even)
+        {
+            RaiseAnswerCallEvent(even.TelephoneNumber, even.ObjectTelephoneNumber, even.StatusInCall);
+        }
+        //генерпция события
+        protected virtual void RaiseAnswerCallEvent(int number,int objectNumber, StatusCall state)
         {
             if(PortAnswerEvent!=null)
             {
-                PortAnswerEvent(this, new AnswerEventArgs(outcomingNumber, number, state));
+                PortAnswerEvent(this, new AnswerArgsEvent(number, objectNumber, state));//запуск события
             }
         }
 
-        public void RaiseIncomingCallEvent(int number,int incomingNumber)
+        protected virtual void RaiseIncomingCallEvent(int number,int objectNumber)
         {
            if(IncomingCallEvent!=null)
             {
-                IncomingCallEvent(this, new CallEventArgs(number, incomingNumber));
+                IncomingCallEvent(this, new CallArgsEvent(number, objectNumber));
             }
         }
+
+        protected virtual void RaiseCallingToEvent(int number, int targetNumber)
+        {
+            if(CallEvent !=null)
+            {
+                CallEvent(this, new CallArgsEvent(number, targetNumber));
+            }
+        }
+        protected virtual void RaiseAnswerToEvent(int number, int objectNumber, StatusCall state)
+        {
+            if (AnswerEvent != null)
+            {
+                AnswerEvent(this, new AnswerArgsEvent(number, objectNumber, state));//запуск события
+            }
+        }
+
+
     }
 }

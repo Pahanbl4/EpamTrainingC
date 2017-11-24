@@ -6,59 +6,72 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-  public  class ATS
+    public class ATS
     {
-        private IList<Port> _listPort;
-        private IList<int> _listtelephoneNumber;
+        //  private IList<Port> _listPort;
+        //private IList<int> _listtelephoneNumber;
+        private IDictionary<int, Tuple<Port, Contract>> _userData;
         Random random;
 
         public ATS()
         {
-            _listPort = new List<Port>();
-            _listtelephoneNumber = new List<int>();
+            _userData = new Dictionary<int, Tuple<Port, Contract>>();
             random = new Random();
         }
 
-        public Terminal GetNewTerminal(int numberTelephone)
+        public Terminal GetNewTerminal(Contract contract)
         {
             //var newNumber = random.Next(1, 9);
 
-            _listtelephoneNumber.Add(numberTelephone);
-            var newPort = new Port(this);
-            _listPort.Add(newPort);
-            var newTerminal = new Terminal(numberTelephone, newPort);
+            // _listtelephoneNumber.Add(numberTelephone);
+            // var newPort = new Port(this);
+            // _listPort.Add(newPort);
+            // var newTerminal = new Terminal(numberTelephone, newPort);
+            var newPort = new Port();
+            newPort.AnswerEvent += CallingTo;
+            newPort.CallEvent += CallingTo;
+            _userData.Add(contract.Number, new Tuple<Port, Contract>(newPort, contract));
+            var newTerminal = new Terminal(contract.Number, newPort);
             return newTerminal;
         }
 
-        public void AnswerTo(object sender,AnswerEventArgs even)
+        public Contract RegisterContract(Client subscriber, TariffTypes type)
         {
-            if(_listtelephoneNumber.Contains(even._telephoneNumber))
+            var contract = new Contract(subscriber, type);
+            //_listContract.Add(contract);
+            return contract;
+        }
+
+        public void CallingTo(object sender, ICallingArgsEvent e)//ссылка на объект который вызвал данное событие,инфа о событие
+        {
+            if (_userData.ContainsKey(e.ObjectTelephoneNumber) && e.ObjectTelephoneNumber != e.TelephoneNumber)
             {
-                var index = _listtelephoneNumber.IndexOf(even._telephoneNumber);
-                if(_listPort[index].status== StatusPort.Free)
+
+                var port = _userData[(e.ObjectTelephoneNumber)].Item1;
+                                if (port.Status == StatusPort.Connect)
                 {
-                    _listPort[index].AnswerCall(even._objectTelephoneNumber,even._telephoneNumber, even.StatusCall);
+                    var tuple = _userData[(e.ObjectTelephoneNumber)];
+                    if (e is AnswerArgsEvent)
+                    {
+
+                        var answerArgs = (AnswerArgsEvent)e;
+                        if (answerArgs.StatusInCall == StatusCall.Answered)
+                        {
+                            //var tuple = _usersData[(e.TargetTelephoneNumber)];
+                            tuple.Item2.Client.RemoveMoney(tuple.Item2.Tariff.PriceOfCall);
+                        }
+                        port.AnswerCall(answerArgs.TelephoneNumber, answerArgs.ObjectTelephoneNumber, answerArgs.StatusInCall);
+                    }
+                    if (e is CallArgsEvent)
+                    {
+                        if (tuple.Item2.Client.Money > 0)   ///допилить в зависимости от тарифа
+                        {
+                            var callArgs = (CallArgsEvent)e;
+                            port.IncomingCall(callArgs.TelephoneNumber, callArgs.ObjectTelephoneNumber);
+                        }
+                    }
                 }
             }
         }
-
-        public void CallingTo(object sender,CallEventArgs even)
-        {
-            if(_listtelephoneNumber.Contains(even.objectTelephoneNumber)&& even.objectTelephoneNumber!=even.telephoneNumber)
-            {
-                var index = _listtelephoneNumber.IndexOf(even.objectTelephoneNumber);
-                if (_listPort[index].status == StatusPort.Free)
-                {
-                    _listPort[index].IncomingCall(even.telephoneNumber,even.objectTelephoneNumber);
-
-                }
-                else if (!_listtelephoneNumber.Contains(even.objectTelephoneNumber))
-                {
-                    Console.WriteLine("You have calling a non-existent number!!!");
-                }
-                else { Console.WriteLine("You have calling a your number!!!"); }
-            }
-        }
-
     }
 }

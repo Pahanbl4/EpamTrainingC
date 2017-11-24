@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-   public class Tariff
+    public class Tariff
     {
-        public readonly int PriceOfMonth;
-        public readonly int PriceOfMinutes;
+        public int PriceOfMonth { get; private set; }
+        public int PriceOfCall { get; set; }
         public TariffTypes TariffType { get; private set; }
+        public int LimitCallInMonth { get; private set; }
 
         public Tariff(TariffTypes type)
         {
@@ -19,25 +20,28 @@ namespace Task3.Classes
             {
                 case TariffTypes.Elementary:
                     {
-                        PriceOfMinutes = 1;
+                        PriceOfCall = 1;
                         PriceOfMonth = 10;
+                        LimitCallInMonth = 10;
                         break;
                     }
                 case TariffTypes.Standart:
                     {
-                        PriceOfMinutes = 1;
+                        PriceOfCall = 2;
                         PriceOfMonth = 15;
+                        LimitCallInMonth = 8;
                         break;
                     }
                 case TariffTypes.Lux:
                     {
-                        PriceOfMinutes = 2;
+                        PriceOfCall = 3;
                         PriceOfMonth = 30;
+                        LimitCallInMonth = 10;
                         break;
                     }
                 default:
                     {
-                        PriceOfMinutes = 0;
+                        PriceOfCall = 0;
                         PriceOfMonth = 0;
                         break;
                     }

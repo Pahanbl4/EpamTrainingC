@@ -28,11 +28,11 @@ namespace Task3.Interfaces
         void RaiseCallEvent(int number);
         void RaiseAnswerEvent(int number, StatusCall state);
         void Call(int number);
-        void TakeIncomingCall(object sender, CallEventArgs even);
+        void TakeIncomingCall(object sender, CallArgsEvent even);
         void ConnectToPort();
         void AnswerToCall(int number, StatusCall state);
         void RejectIncomingCall();
-        void TakeAnswer(object sender, AnswerEventArgs e);
+        void TakeAnswer(object sender, AnswerArgsEvent e);
 
     }
 }
