@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task3.Classes;
 
-namespace Task3.Classes
+namespace Task3.Bylling
 {
     public class Tariff
     {
         public int PriceOfMonth { get; private set; }
-        public int PriceOfCall { get; set; }
+        public int PriceOfCallPerMinute { get; set; }
         public TariffTypes TariffType { get; private set; }
         public int LimitCallInMonth { get; private set; }
 
@@ -20,28 +21,28 @@ namespace Task3.Classes
             {
                 case TariffTypes.Elementary:
                     {
-                        PriceOfCall = 1;
+                        PriceOfCallPerMinute = 1;
                         PriceOfMonth = 10;
                         LimitCallInMonth = 10;
                         break;
                     }
                 case TariffTypes.Standart:
                     {
-                        PriceOfCall = 2;
+                        PriceOfCallPerMinute = 2;
                         PriceOfMonth = 15;
                         LimitCallInMonth = 8;
                         break;
                     }
                 case TariffTypes.Lux:
                     {
-                        PriceOfCall = 3;
+                        PriceOfCallPerMinute = 3;
                         PriceOfMonth = 30;
                         LimitCallInMonth = 10;
                         break;
                     }
                 default:
                     {
-                        PriceOfCall = 0;
+                        PriceOfCallPerMinute = 0;
                         PriceOfMonth = 0;
                         break;
                     }

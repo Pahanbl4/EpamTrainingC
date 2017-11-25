@@ -14,13 +14,15 @@ namespace Task3.Classes
         public bool Flag;
 
        // public delegate void CallEventHandler(object sender, CallArgsEvent e);
-        public event EventHandler<CallArgsEvent> IncomingCallEvent;
+        public event EventHandler<CallArgsEvent> PortCallEvent;
         // public delegate void AnswerEventHandler(object sender, AnswerArgsEvent e);
         public event EventHandler<AnswerArgsEvent> PortAnswerEvent;
         //  public delegate void CallEventHandler(object sender, CallArgsEvent e);
         public event EventHandler<CallArgsEvent> CallEvent;
        // public delegate void AnswerEventHandler(object sender, AnswerArgsEvent e);
         public event EventHandler<AnswerArgsEvent> AnswerEvent;
+
+        public event EventHandler<EndCallArgsEvent> EndCallEvent;
 
         public Port()
         {
@@ -36,7 +38,8 @@ namespace Task3.Classes
                 Status = StatusPort.Connect;
 
                 terminal.CallEvent += CallingTo;            
-                terminal.AnswerEvent += AnswerTo;            
+                terminal.AnswerEvent += AnswerTo;
+                terminal.EndCallEvent += EndCall;
                 Flag = true;
             }
             return Flag;
@@ -49,13 +52,13 @@ namespace Task3.Classes
                 Status = StatusPort.Disconnect;
                 terminal.CallEvent -= CallingTo;
                 terminal.AnswerEvent -= AnswerTo;
+                terminal.EndCallEvent += EndCall;
                 Flag = false;
 
             }
             return Flag;
         }
-
-        public void IncomingCall(int number,int objectNumber)
+        public void IncomingCall(int number, int objectNumber)
         {
             RaiseIncomingCallEvent(number, objectNumber);
         }
@@ -65,29 +68,62 @@ namespace Task3.Classes
             RaiseAnswerCallEvent(number, objectNumber, state);
         }
 
+        public void IncomingCall(int number,int objectNumber,Guid id)
+        {
+            RaiseIncomingCallEvent(number, objectNumber,id);
+        }
+
+        public void AnswerCall(int number, int objectNumber, StatusCall state,Guid id)
+        {
+            RaiseAnswerCallEvent(number, objectNumber, state,id);
+        }
+
         private void CallingTo(object sender, CallArgsEvent even)
         {
             RaiseCallingToEvent(even.TelephoneNumber, even.ObjectTelephoneNumber);
         }
 
-        private void AnswerTo(object sebder, AnswerArgsEvent even)
+        private void AnswerTo(object sender, AnswerArgsEvent even)
         {
-            RaiseAnswerCallEvent(even.TelephoneNumber, even.ObjectTelephoneNumber, even.StatusInCall);
+            RaiseAnswerToEvent(even);
+
         }
+
+        private void EndCall(object sender,EndCallArgsEvent even)
+        {
+            RaiseEndCallEvent(even.Id, even.TelephoneNumber);
+        }
+
         //генерпция события
-        protected virtual void RaiseAnswerCallEvent(int number,int objectNumber, StatusCall state)
+        protected virtual void RaiseAnswerCallEvent(int number,int objectNumber, StatusCall status,Guid id)
         {
             if(PortAnswerEvent!=null)
             {
-                PortAnswerEvent(this, new AnswerArgsEvent(number, objectNumber, state));//запуск события
+                PortAnswerEvent(this, new AnswerArgsEvent(number, objectNumber, status,id));//запуск события
             }
         }
 
-        protected virtual void RaiseIncomingCallEvent(int number,int objectNumber)
+        protected virtual void RaiseAnswerCallEvent(int number, int objectNumber, StatusCall status)
         {
-           if(IncomingCallEvent!=null)
+            if (PortAnswerEvent != null)
             {
-                IncomingCallEvent(this, new CallArgsEvent(number, objectNumber));
+                PortAnswerEvent(this, new AnswerArgsEvent(number, objectNumber, status));//запуск события
+            }
+        }
+
+        protected virtual void RaiseIncomingCallEvent(int number,int objectNumber,Guid id)
+        {
+           if(PortCallEvent!=null)
+            {
+                PortCallEvent(this, new CallArgsEvent(number, objectNumber,id));
+            }
+        }
+
+        protected virtual void RaiseIncomingCallEvent(int number, int objectNumber)
+        {
+            if (PortCallEvent != null)
+            {
+                PortCallEvent(this, new CallArgsEvent(number, objectNumber));
             }
         }
 
@@ -98,11 +134,19 @@ namespace Task3.Classes
                 CallEvent(this, new CallArgsEvent(number, targetNumber));
             }
         }
-        protected virtual void RaiseAnswerToEvent(int number, int objectNumber, StatusCall state)
+        protected virtual void RaiseAnswerToEvent(AnswerArgsEvent even)
         {
             if (AnswerEvent != null)
             {
-                AnswerEvent(this, new AnswerArgsEvent(number, objectNumber, state));//запуск события
+                AnswerEvent(this, new AnswerArgsEvent(even.TelephoneNumber, even.ObjectTelephoneNumber, even.StatusInCall, even.Id));//запуск события
+            }
+        }
+        protected virtual void RaiseEndCallEvent(Guid id,int number)
+
+        {
+            if(EndCallEvent!=null)
+            {
+                EndCallEvent(this, new EndCallArgsEvent(id, number));
             }
         }
 

@@ -12,7 +12,7 @@ namespace Task3.Classes
 
         public int ObjectTelephoneNumber { get; private set; }
 
-        public int Id { get; private set; }
+        public Guid Id { get; private set; }
 
         public StatusCall StatusInCall;
 
@@ -24,7 +24,7 @@ namespace Task3.Classes
             StatusInCall = status;
         }
 
-        public AnswerArgsEvent(int number, int target, StatusCall status, int id)
+        public AnswerArgsEvent(int number, int target, StatusCall status, Guid id)
         {
             TelephoneNumber = number;
             ObjectTelephoneNumber = target;

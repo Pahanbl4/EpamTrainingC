@@ -15,7 +15,7 @@ namespace Task3.Classes
             get { return _number; }
         }
         private Port _terminalPort;
-
+        private Guid _id;
         public Terminal(int number,Port port)
         {
             _number = number;
@@ -25,37 +25,64 @@ namespace Task3.Classes
           public event EventHandler<CallArgsEvent> CallEvent;
         //  public delegate void AnswerEventHandler(object sender, AnswerEventArgs e);
           public event EventHandler<AnswerArgsEvent> AnswerEvent;
+         // public delegate void EndCallEventHandler(object sender, EndCallArgsEvent e);
+          public event EventHandler<EndCallArgsEvent> EndCallEvent;
 
-        public void AnswerToCall(int target, StatusCall state)
+        public void AnswerToCall(int target, StatusCall state,Guid id)
         {
-            RaiseAnswerEvent(target, state); //вызов события
+            RaiseAnswerEvent(target, state,id); //вызов события
         }
 
         public void Call(int objectNumber)
         {
             RaiseCallEvent(objectNumber);
-            Console.WriteLine("Звонок совершен");
+          
         }
 
         public void ConnectToPort()
         {
          if(_terminalPort.Connect(this))
             {
-                _terminalPort.IncomingCallEvent += TakeIncomingCall;
+                _terminalPort.PortCallEvent += TakeIncomingCall;
                 _terminalPort.PortAnswerEvent += TakeAnswer;
             }
         }
 
         public void TakeIncomingCall(object sender, CallArgsEvent even)
         {
+            bool flag = true;
+            _id = even.Id;
             Console.WriteLine("Have incoming call at number:{0} to terminal {1}", even.TelephoneNumber,even.ObjectTelephoneNumber);
+
+            while(flag==true)
+            {
+                Console.WriteLine("Reply? Yes=1 or No=0");
+                char k = Console.ReadKey().KeyChar;
+                if(k==1)
+                {
+                    flag = false;
+                    Console.WriteLine();
+                    AnswerToCall(even.TelephoneNumber, StatusCall.Answered, even.Id);
+                }
+                else if(k ==0)
+                {
+                    flag = false;
+                    Console.WriteLine();
+                    EndCall();
+                }
+                else
+                {
+                    flag = true;
+                    Console.WriteLine();
+                }
+            }
         }
 
-        public virtual void RaiseAnswerEvent(int objectNumber, StatusCall state)//генерация события
+        public virtual void RaiseAnswerEvent(int objectNumber, StatusCall state, Guid id)//генерация события
         {
            if(AnswerEvent!=null)
             {
-                AnswerEvent(this, new AnswerArgsEvent(_number,objectNumber, state)); //запуск события
+                AnswerEvent(this, new AnswerArgsEvent(_number,objectNumber, state,id)); //запуск события
             }
         }
 
@@ -64,16 +91,24 @@ namespace Task3.Classes
             if(CallEvent!=null)
             {
                 CallEvent(this, new CallArgsEvent(_number, objectNumber));
+             
             }
         }
 
-        public void RejectIncomingCall()
+        protected virtual void RaiseEndCallEvent(Guid id)
         {
-            throw new NotImplementedException();
+            if (EndCallEvent != null)
+                EndCallEvent(this, new EndCallArgsEvent(id, _number));
+        }
+
+        public void EndCall()
+        {
+            RaiseEndCallEvent(_id);
         }
 
         public void TakeAnswer(object sender, AnswerArgsEvent even)
         {
+            _id = even.Id;
             if(even.StatusInCall==StatusCall.Answered)
             {
                 Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", even.TelephoneNumber, even.ObjectTelephoneNumber);

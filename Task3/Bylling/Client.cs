@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3.Classes
+namespace Task3.Bylling
 {
    public class Client
     {

@@ -26,12 +26,12 @@ namespace Task3.Interfaces
         //event EventHandler UnPlugging; //срабатывает, когда пользователь отключает устройство
 
         void RaiseCallEvent(int number);
-        void RaiseAnswerEvent(int number, StatusCall state);
+        void RaiseAnswerEvent(int objectNumber, StatusCall state, Guid id);
         void Call(int number);
         void TakeIncomingCall(object sender, CallArgsEvent even);
         void ConnectToPort();
-        void AnswerToCall(int number, StatusCall state);
-        void RejectIncomingCall();
+        void AnswerToCall(int target, StatusCall state, Guid id);
+        void EndCall();
         void TakeAnswer(object sender, AnswerArgsEvent e);
 
     }

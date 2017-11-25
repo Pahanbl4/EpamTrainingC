@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-    public interface ICallingArgsEvent
+    public enum CallTypes
     {
-        int TelephoneNumber { get; }
-        int ObjectTelephoneNumber { get; }
-        Guid Id { get; }
+        IncomingCall,
+        OutgoingCall
     }
 }
