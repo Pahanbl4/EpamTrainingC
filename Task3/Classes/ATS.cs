@@ -4,20 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task3.Interfaces;
+using Task3.Arguments;
 using Task3.Bylling;
 
 namespace Task3.Classes
 {
-    public class ATS:IRepository<InformationCall>
+    public class ATS:IATS
     {
         private IDictionary<int, Tuple<Port, Contract>> _userData;
-        private Random _random;
         private IList<InformationCall> _callList = new List<InformationCall>();
 
         public ATS()
         {
             _userData = new Dictionary<int, Tuple<Port, Contract>>();
-            _random = new Random();
         }
 
         public Terminal GetNewTerminal(Contract contract)
@@ -49,7 +48,7 @@ namespace Task3.Classes
                 if(even is EndCallArgsEvent)
                 {
                     var callListFirst = _callList.First(x => x.Id.Equals(even.Id));
-                    if(_callList.First(x=> x.Id.Equals(even.Id)).MyNumber == even.TelephoneNumber)
+                    if(callListFirst.MyNumber == even.TelephoneNumber)
                     {
                         objectPort = _userData[callListFirst.ObjectNumber].Item1;
                         port = _userData[callListFirst.MyNumber].Item1;
@@ -76,12 +75,13 @@ namespace Task3.Classes
                 {
                     var tuple = _userData[number];
                     var objectTuple = _userData[objectNumber];
-                    if (even is AnswerArgsEvent)
-                    {
 
-                        var answerArgs = (AnswerArgsEvent)even;
+
+                    if (even is AnswerArgsEvent answerArgs)
+                    {
                         InformationCall information = null;
-                        if(!answerArgs.Id.Equals(Guid.Empty) && _callList.Any(x=>x.Id.Equals(answerArgs.Id)))
+
+                        if (!answerArgs.Id.Equals(Guid.Empty) && _callList.Any(x => x.Id.Equals(answerArgs.Id)))
                         {
                             information = _callList.First(x => x.Id.Equals(answerArgs.Id));
                         }
@@ -92,7 +92,7 @@ namespace Task3.Classes
                         else
                         {
                             objectPort.AnswerCall(answerArgs.TelephoneNumber, answerArgs.ObjectTelephoneNumber, answerArgs.StatusInCall);
-                        }    
+                        }
 
                     }
                     if (even is CallArgsEvent)
@@ -137,7 +137,15 @@ namespace Task3.Classes
                     }
                     }
                 }
+            else if (!_userData.ContainsKey(even.ObjectTelephoneNumber))
+            {
+                Console.WriteLine("You have calling a non-existent number");
             }
+            else
+            {
+                Console.WriteLine("You have calling a your number");
+            }
+        }
 
         public IList<InformationCall> GetInfoList()
         {

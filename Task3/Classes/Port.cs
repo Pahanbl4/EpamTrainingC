@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task3.Interfaces;
+using Task3.Arguments;
 
 namespace Task3.Classes
 {
@@ -13,21 +14,15 @@ namespace Task3.Classes
   
         public bool Flag;
 
-       // public delegate void CallEventHandler(object sender, CallArgsEvent e);
         public event EventHandler<CallArgsEvent> PortCallEvent;
-        // public delegate void AnswerEventHandler(object sender, AnswerArgsEvent e);
         public event EventHandler<AnswerArgsEvent> PortAnswerEvent;
-        //  public delegate void CallEventHandler(object sender, CallArgsEvent e);
         public event EventHandler<CallArgsEvent> CallEvent;
-       // public delegate void AnswerEventHandler(object sender, AnswerArgsEvent e);
         public event EventHandler<AnswerArgsEvent> AnswerEvent;
-
         public event EventHandler<EndCallArgsEvent> EndCallEvent;
 
         public Port()
         {
-            Status = StatusPort.UnPlugged;
-         
+            Status = StatusPort.Disconnect;
         }
     
 
@@ -58,96 +53,77 @@ namespace Task3.Classes
             }
             return Flag;
         }
-        public void IncomingCall(int number, int objectNumber)
-        {
-            RaiseIncomingCallEvent(number, objectNumber);
-        }
+       
 
-        public void AnswerCall(int number, int objectNumber, StatusCall state)
-        {
-            RaiseAnswerCallEvent(number, objectNumber, state);
-        }
+
 
         public void IncomingCall(int number,int objectNumber,Guid id)
         {
-            RaiseIncomingCallEvent(number, objectNumber,id);
+            DoIncomingCallEvent(number, objectNumber,id);
+        }
+
+        public void IncomingCall(int number, int objectNumber)
+        {
+            DoIncomingCallEvent(number, objectNumber);
         }
 
         public void AnswerCall(int number, int objectNumber, StatusCall state,Guid id)
         {
-            RaiseAnswerCallEvent(number, objectNumber, state,id);
+            DoAnswerCallEvent(number, objectNumber, state,id);
+        }
+
+        public void AnswerCall(int number, int objectNumber, StatusCall state)
+        {
+            DoAnswerCallEvent(number, objectNumber, state);
         }
 
         private void CallingTo(object sender, CallArgsEvent even)
         {
-            RaiseCallingToEvent(even.TelephoneNumber, even.ObjectTelephoneNumber);
+            DoCallingToEvent(even.TelephoneNumber, even.ObjectTelephoneNumber);
         }
 
         private void AnswerTo(object sender, AnswerArgsEvent even)
         {
-            RaiseAnswerToEvent(even);
-
+            DoAnswerToEvent(even);
         }
 
         private void EndCall(object sender,EndCallArgsEvent even)
         {
-            RaiseEndCallEvent(even.Id, even.TelephoneNumber);
+            DoEndCallEvent(even.Id, even.TelephoneNumber);
         }
 
         //генерпция события
-        protected virtual void RaiseAnswerCallEvent(int number,int objectNumber, StatusCall status,Guid id)
+        protected virtual void DoAnswerCallEvent(int number,int objectNumber, StatusCall status,Guid id)
         {
-            if(PortAnswerEvent!=null)
-            {
-                PortAnswerEvent(this, new AnswerArgsEvent(number, objectNumber, status,id));//запуск события
-            }
+            PortAnswerEvent?.Invoke(this, new AnswerArgsEvent(number, objectNumber, status, id));//запуск события
         }
 
-        protected virtual void RaiseAnswerCallEvent(int number, int objectNumber, StatusCall status)
+        protected virtual void DoAnswerCallEvent(int number, int objectNumber, StatusCall status)
         {
-            if (PortAnswerEvent != null)
-            {
-                PortAnswerEvent(this, new AnswerArgsEvent(number, objectNumber, status));//запуск события
-            }
+            PortAnswerEvent?.Invoke(this, new AnswerArgsEvent(number, objectNumber, status));//запуск события
         }
 
-        protected virtual void RaiseIncomingCallEvent(int number,int objectNumber,Guid id)
+        protected virtual void DoIncomingCallEvent(int number,int objectNumber,Guid id)
         {
-           if(PortCallEvent!=null)
-            {
-                PortCallEvent(this, new CallArgsEvent(number, objectNumber,id));
-            }
+            PortCallEvent?.Invoke(this, new CallArgsEvent(number, objectNumber, id));
         }
 
-        protected virtual void RaiseIncomingCallEvent(int number, int objectNumber)
+        protected virtual void DoIncomingCallEvent(int number, int objectNumber)
         {
-            if (PortCallEvent != null)
-            {
-                PortCallEvent(this, new CallArgsEvent(number, objectNumber));
-            }
+            PortCallEvent?.Invoke(this, new CallArgsEvent(number, objectNumber));
         }
 
-        protected virtual void RaiseCallingToEvent(int number, int targetNumber)
+        protected virtual void DoCallingToEvent(int number, int targetNumber)
         {
-            if(CallEvent !=null)
-            {
-                CallEvent(this, new CallArgsEvent(number, targetNumber));
-            }
+            CallEvent?.Invoke(this, new CallArgsEvent(number, targetNumber));
         }
-        protected virtual void RaiseAnswerToEvent(AnswerArgsEvent even)
+        protected virtual void DoAnswerToEvent(AnswerArgsEvent even)
         {
-            if (AnswerEvent != null)
-            {
-                AnswerEvent(this, new AnswerArgsEvent(even.TelephoneNumber, even.ObjectTelephoneNumber, even.StatusInCall, even.Id));//запуск события
-            }
+            AnswerEvent?.Invoke(this, new AnswerArgsEvent(even.TelephoneNumber, even.ObjectTelephoneNumber, even.StatusInCall, even.Id));//запуск события
         }
-        protected virtual void RaiseEndCallEvent(Guid id,int number)
-
+        protected virtual void DoEndCallEvent(Guid id,int number)
         {
-            if(EndCallEvent!=null)
-            {
-                EndCallEvent(this, new EndCallArgsEvent(id, number));
-            }
+            EndCallEvent?.Invoke(this, new EndCallArgsEvent(id, number));
         }
 
 

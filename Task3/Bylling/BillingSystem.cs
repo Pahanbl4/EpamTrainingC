@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task3.Interfaces;
+using Task3.Arguments;
 using Task3.Classes;
 
 namespace Task3.Bylling
@@ -19,8 +20,7 @@ namespace Task3.Bylling
 
         public Report GetReport(int telephoneNumber)
         {
-            var calls = _repository.GetInfoList().
-                Where(x => x.MyNumber == telephoneNumber || x.ObjectNumber == telephoneNumber).ToList();
+            var calls = _repository.GetInfoList().Where(x => x.MyNumber == telephoneNumber || x.ObjectNumber == telephoneNumber).ToList();
             var report = new Report();
 
             foreach(var call in calls)

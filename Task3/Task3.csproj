@@ -42,24 +42,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bylling\BillingSystem.cs" />
-    <Compile Include="Classes\CallTypes.cs" />
-    <Compile Include="Classes\AnswerArgsEvent.cs" />
+    <Compile Include="Interfaces\IATS.cs" />
+    <Compile Include="Interfaces\IBillingSystem.cs" />
+    <Compile Include="StatusTypes\CallTypes.cs" />
+    <Compile Include="Arguments\AnswerArgsEvent.cs" />
     <Compile Include="Classes\ATS.cs" />
-    <Compile Include="Classes\CallArgsEvent.cs" />
+    <Compile Include="Arguments\CallArgsEvent.cs" />
     <Compile Include="Bylling\CallRecords.cs" />
     <Compile Include="Bylling\Contract.cs" />
-    <Compile Include="Classes\EndCallArgsEvent.cs" />
+    <Compile Include="Arguments\EndCallArgsEvent.cs" />
     <Compile Include="Bylling\Report.cs" />
     <Compile Include="Bylling\ReportShow.cs" />
-    <Compile Include="Classes\SortType.cs" />
+    <Compile Include="StatusTypes\SortTypes.cs" />
     <Compile Include="Interfaces\ICallingArgsEvent.cs" />
     <Compile Include="Classes\InformationCall.cs" />
     <Compile Include="Classes\Port.cs" />
-    <Compile Include="Classes\StatusCall.cs" />
-    <Compile Include="Classes\StatusPort.cs" />
+    <Compile Include="StatusTypes\StatusCall.cs" />
+    <Compile Include="StatusTypes\StatusPort.cs" />
     <Compile Include="Bylling\Client.cs" />
     <Compile Include="Bylling\Tariff.cs" />
-    <Compile Include="Classes\TariffTypes.cs" />
+    <Compile Include="StatusTypes\TariffTypes.cs" />
     <Compile Include="Classes\Terminal.cs" />
     <Compile Include="Interfaces\IPort.cs" />
     <Compile Include="Interfaces\IRepository.cs" />

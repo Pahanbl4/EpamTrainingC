@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3.Classes
+namespace Task3
 {
-    public enum TariffTypes
+   public enum SortTypes
     {
-        Elementary,
-        Standart,
-        Lux
+        SortByTypeCall,
+        SortByDate,
+        SortByPrice,
+        SortByNumber
     }
 }

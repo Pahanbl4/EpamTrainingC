@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task3.Arguments;
 using Task3.Classes;
 
 namespace Task3.Bylling
@@ -23,21 +24,21 @@ namespace Task3.Bylling
 
 
         }
-        public IEnumerable<CallRecords> SortCalls(Report report, SortType sortType)
+        public IEnumerable<CallRecords> SortCalls(Report report, SortTypes sortType)
         {
             var reports = report.GetCallRecords();
             switch (sortType)
             {
-                case SortType.SortByTypeCall:
+                case SortTypes.SortByTypeCall:
                     return reports = reports.OrderBy(x => x.CallType).ToList();
 
-                case SortType.SortByDate:
+                case SortTypes.SortByDate:
                     return reports = reports.OrderBy(x => x.Date).ToList();
 
-                case SortType.SortByPrice:
+                case SortTypes.SortByPrice:
                     return reports = reports.OrderBy(x => x.Price).ToList();
 
-                case SortType.SortByNumber:
+                case SortTypes.SortByNumber:
                     return reports = reports.OrderBy(x => x.Number).ToList();
 
                 default:

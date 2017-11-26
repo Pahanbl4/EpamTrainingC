@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Task3.Interfaces;
 
-namespace Task3.Classes
+namespace Task3.Arguments
 {
     public class EndCallArgsEvent : EventArgs, ICallingArgsEvent
     {

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3.Classes
+namespace Task3
 {
-  public enum StatusCall
+  public enum StatusPort
     {
-        Answered,// ответил
-        Rejected //скинул
+        Connect,
+        Disconnect,
+        UnPlugged  //отключен от сети
     }
 }
