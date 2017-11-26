@@ -51,6 +51,7 @@
     <Compile Include="Classes\EndCallArgsEvent.cs" />
     <Compile Include="Bylling\Report.cs" />
     <Compile Include="Bylling\ReportShow.cs" />
+    <Compile Include="Classes\SortType.cs" />
     <Compile Include="Interfaces\ICallingArgsEvent.cs" />
     <Compile Include="Classes\InformationCall.cs" />
     <Compile Include="Classes\Port.cs" />

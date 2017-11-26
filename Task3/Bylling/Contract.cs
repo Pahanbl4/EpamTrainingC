@@ -27,13 +27,18 @@ namespace Task3.Bylling
 
         public bool TariffChange(TariffTypes tariffTypes)
         {
-            if(DateTime.Now.AddMonths(-1)>=LastTariffUpdate)
+            if (DateTime.Now.AddMonths(-1) >= LastTariffUpdate)
             {
                 LastTariffUpdate = DateTime.Now;
                 Tariff = new Tariff(tariffTypes);
+                Console.WriteLine("Tariff has changed");
                 return true;
             }
-            return false;
+            else
+            {
+                Console.WriteLine("wait for the end of this month");
+                return false;
+            }
         }
 
 

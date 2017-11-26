@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Task3.Classes
 {
-    public enum TariffTypes
+   public enum SortType
     {
-        Elementary,
-        Standart,
-        Lux
+        SortByTypeCall,
+        SortByDate,
+        SortByPrice,
+        SortByNumber
     }
 }
