@@ -10,6 +10,6 @@ namespace Task3
     {
         Connect,
         Disconnect,
-        UnPlugged 
+        UnPlugged  //отключен от сети
     }
 }

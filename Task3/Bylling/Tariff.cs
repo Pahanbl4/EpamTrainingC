@@ -10,7 +10,7 @@ namespace Task3.Bylling
     public class Tariff
     {
         public int PriceOfMonth { get; private set; }
-        public int PriceOfCallPerMinute { get; private set; }
+        public int PriceOfCallPerMinute { get; set; }
         public TariffTypes TariffType { get; private set; }
         public int LimitCallInMonth { get; private set; }
 

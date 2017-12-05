@@ -77,7 +77,7 @@ namespace Task3.Classes
             DoAnswerCallEvent(number, objectNumber, state);
         }
 
-        private void CallingTo(object sender, CallArgsEvent even) //обработчики события
+        private void CallingTo(object sender, CallArgsEvent even)
         {
             DoCallingToEvent(even.TelephoneNumber, even.ObjectTelephoneNumber);
         }

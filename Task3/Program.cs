@@ -19,8 +19,8 @@ namespace Task3
             BillingSystem billingSystem = new BillingSystem(ats);
             Contract contract1 = ats.RegisterContract(new Client("Ivan", "Ivanov", 30), TariffTypes.Standart);
             Contract contract2 = ats.RegisterContract(new Client("Ilja", "Iljin", 10), TariffTypes.Elementary);
-            Contract contract3 = ats.RegisterContract(new Client("Liza", "Lizochkina", 50), TariffTypes.Lux);
-            contract1.TariffChange(TariffTypes.Lux);
+            Contract contract3 = ats.RegisterContract(new Client("Dima", "Grachev", 50), TariffTypes.Lux);
+
 
             contract1.Client.AddMoney(50);
             var t1 = ats.GetNewTerminal(contract1);
@@ -39,13 +39,8 @@ namespace Task3
             Thread.Sleep(1000);
             t3.EndCall();
             t2.Call(t1.Number);
-            Thread.Sleep(1000);
+            Thread.Sleep(30000);
             t1.EndCall();
-
-            t2.Call(t3.Number);
-            Thread.Sleep(1000);
-            t2.EndCall();
-
             t3.Call(1234567);
             t2.Call(t2.Number);
 
