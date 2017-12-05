@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3
+namespace Taskk4
 {
-  public enum StatusPort
+    public class Class1
     {
-        Connect,
-        Disconnect,
-        UnPlugged 
     }
 }

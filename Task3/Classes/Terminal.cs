@@ -37,7 +37,10 @@ namespace Task3.Classes
 
         public virtual void DoCallEvent(int objectNumber)//генерация события
         {
-            CallEvent?.Invoke(this, new CallArgsEvent(_number, objectNumber));
+            if (CallEvent != null)
+            {
+                CallEvent(this, new CallArgsEvent(_number, objectNumber));
+            }
         }
 
         protected virtual void DoEndCallEvent(Guid id)
@@ -109,7 +112,7 @@ namespace Task3.Classes
                 Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", even.TelephoneNumber, even.ObjectTelephoneNumber);
             }
             else
-            { Console.WriteLine("Terminal with number: {0}, have rejected call ", even.TelephoneNumber); }
+            { Console.WriteLine("Terminal with number: {0}, have end call ", even.TelephoneNumber); }
            
         }
     }
