@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,29 +14,30 @@ namespace WindowsService
         private InfoHandler _infoHandler;
         private FileSystemWatcher _fileWatcher;
         private Task task;
+        private string path = ConfigurationManager.AppSettings["Path"];
 
         public Watcher()
         {
             _infoHandler = new InfoHandler();
-            _fileWatcher = new FileSystemWatcher();
-            _fileWatcher.Path = "C:\\Managers";
-            _fileWatcher.Filter = "*.csv";
-            _fileWatcher.NotifyFilter = NotifyFilters.FileName;
+            _fileWatcher = new FileSystemWatcher(path, "*.csv")
+            {
+                NotifyFilter = NotifyFilters.FileName
+            };
 
             _fileWatcher.Changed += new FileSystemEventHandler(OnChanged);
             _fileWatcher.Created += new FileSystemEventHandler(OnChanged);
             _fileWatcher.EnableRaisingEvents = true;
         }
 
-        public void run()
-        {
+       
 
-        }
         public void OnChanged(object source, FileSystemEventArgs e)
         {
             task = new Task(() => CallParse(source, e));
             task.Start();
         }
+
+
         public void CallParse(object source, FileSystemEventArgs e)
         {
             string path;
