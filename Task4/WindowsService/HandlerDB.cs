@@ -14,7 +14,7 @@ namespace WindowsService
         private IRepository<DAL.Models.Client, Modell.Client> _clientRepository;
         private IRepository<DAL.Models.Product, Modell.Product> _productRepository;
         private IRepository<DAL.Models.SaleInfo, Modell.SaleInfo> _saleInfoRepository;
-
+        private object obj = new object();
         public HandlerDB()
         {
             _managerRepository = new ManagerRepository();
@@ -25,9 +25,12 @@ namespace WindowsService
 
         public void AddToDatabase(InfoList infoList)
         {
-            lock (this)
+            lock (obj)
             {
-                var newManager = new DAL.Models.Manager { ManagerName = infoList.ManagerName };
+                var newManager = new DAL.Models.Manager
+                {
+                    ManagerName = infoList.ManagerName
+                };
                 var manager = _managerRepository.GetEntity(newManager);
                 if (manager == null)
                 {
@@ -36,12 +39,18 @@ namespace WindowsService
                     manager = _managerRepository.GetEntity(newManager);
                 }
 
-                var newClient = new DAL.Models.Client { ClientName = infoList.ClientName };
+                var newClient = new DAL.Models.Client
+                {
+                    ClientName = infoList.ClientName
+                };
                 _clientRepository.Add(newClient);
                 _clientRepository.SaveChanges();
                 var client = _clientRepository.GetEntity(newClient);
 
-                var newProduct = new DAL.Models.Product { ProductName = infoList.ProductName, ProductCost = infoList.ProductCost };
+                var newProduct = new DAL.Models.Product
+                {
+                    ProductName = infoList.ProductName, ProductCost = infoList.ProductCost
+                };
                 _productRepository.Add(newProduct);
                 _productRepository.SaveChanges();
                 var product = _productRepository.GetEntity(newProduct);

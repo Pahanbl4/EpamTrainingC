@@ -9,8 +9,8 @@ namespace WindowsService
    public class InfoList
     {
         public string ManagerName { get; private set; }
-        public string SaleDate { get; private set; }
         public string ClientName { get; private set; }
+        public string SaleDate { get; private set; }  
         public string ProductName { get; private set; }
         public string ProductCost { get; private set; }
 

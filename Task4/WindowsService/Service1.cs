@@ -13,6 +13,7 @@ namespace WindowsService
     public partial class Service1 : ServiceBase
     {
         private Watcher _watcher;
+        
         public Service1()
         {
             InitializeComponent();
