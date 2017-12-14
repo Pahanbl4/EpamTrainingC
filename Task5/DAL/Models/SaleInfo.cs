@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-   public class SaleInfo : IDisposable
+   public class SaleInfo 
     {
         public int ID_Sale { get; set; }
         public string SaleDate { get; set; }
