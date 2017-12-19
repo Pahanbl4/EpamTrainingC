@@ -20,6 +20,7 @@ namespace Modell.UsersModel.Model
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
+    using Modell.UsersModel.Model;
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ModelUsers")]

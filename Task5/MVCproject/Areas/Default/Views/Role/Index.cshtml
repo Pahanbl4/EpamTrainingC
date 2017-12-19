@@ -1,0 +1,27 @@
+﻿@model IList<Modell.UsersModel.Model.Role>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Roles</h2>
+
+<p>
+    @foreach (var role in Model)
+
+    {
+        <div class="item">
+            <span class="id">
+                @role.IdRole
+            </span>
+            <span class="name">
+                @role.Name
+            </span>
+            <span class="Code">
+                @role.Code
+            </span>
+        </div>
+    }
+</p>
+
