@@ -12,6 +12,8 @@ namespace MVCproject.App_Start
     using System.Web;
     using System.Configuration;
     using Modell.UsersModel.Model;
+    using MVCproject.Mappers;
+    using MVCproject.Global.Auth;
 
     public static class NinjectWebCommon
     {
@@ -55,8 +57,10 @@ namespace MVCproject.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<UsersDataDataContext>().ToMethod(c => new UsersDataDataContext());
+            kernel.Bind<UserDataDataContext>().ToMethod(c => new UserDataDataContext());
             kernel.Bind<IUserRepository>().To<SqlRepository>().InRequestScope();
+            kernel.Bind<IMapper>().To<CommonMapper>().InSingletonScope();
+            kernel.Bind<IAuthentication>().To<CustomAuthentication>().InRequestScope();
         }
     }
 }

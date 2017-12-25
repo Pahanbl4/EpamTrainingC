@@ -20,9 +20,8 @@ namespace Modell
             this.SaleInfo = new HashSet<SaleInfo>();
         }
     
-        public int ID_Product { get; set; }
+        public int Id { get; set; }
         public string ProductName { get; set; }
-        public string ProductCost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleInfo> SaleInfo { get; set; }

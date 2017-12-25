@@ -54,28 +54,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs">
-      <DependentUpon>ModelDBConnect.tt</DependentUpon>
+      <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\ClientData.cs" />
+    <Compile Include="DataModel\ManagerData.cs" />
+    <Compile Include="DataModel\ProductData.cs" />
+    <Compile Include="DataModel\SaleInfoData.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="Manager.cs">
-      <DependentUpon>ModelDBConnect.tt</DependentUpon>
+      <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelDBConnect.Context.cs">
+    <Compile Include="ModelData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDBConnect.Context.tt</DependentUpon>
+      <DependentUpon>ModelData.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelDBConnect.cs">
+    <Compile Include="ModelData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDBConnect.tt</DependentUpon>
+      <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelDBConnect.Designer.cs">
+    <Compile Include="ModelData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDBConnect.edmx</DependentUpon>
+      <DependentUpon>ModelData.edmx</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>ModelDBConnect.tt</DependentUpon>
+      <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -84,12 +89,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SaleInfo.cs">
-      <DependentUpon>ModelDBConnect.tt</DependentUpon>
+      <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
-    <Compile Include="UsersModel\Model\UsersData.designer.cs">
+    <Compile Include="UsersModel\Model\UserData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UsersData.dbml</DependentUpon>
+      <DependentUpon>UserData.dbml</DependentUpon>
     </Compile>
     <Compile Include="UsersModel\UsersRepository\IUserRepository.cs" />
     <Compile Include="UsersModel\UsersRepository\SqlRepository.cs" />
@@ -100,43 +105,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="ModelDBConnect.edmx">
+    <EntityDeploy Include="ModelData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDBConnect.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelDBConnect.edmx.diagram">
-      <DependentUpon>ModelDBConnect.edmx</DependentUpon>
+    <None Include="ModelData.edmx.diagram">
+      <DependentUpon>ModelData.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="UsersModel\Model\UsersData.dbml">
+    <None Include="UsersModel\Model\UserData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>UsersData.designer.cs</LastGenOutput>
+      <LastGenOutput>UserData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="UsersModel\Model\UsersData.dbml.layout">
-      <DependentUpon>UsersData.dbml</DependentUpon>
+    <None Include="UsersModel\Model\UserData.dbml.layout">
+      <DependentUpon>UserData.dbml</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ModelDBConnect.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelDBConnect.Context.cs</LastGenOutput>
-      <DependentUpon>ModelDBConnect.edmx</DependentUpon>
-    </Content>
-    <Content Include="ModelDBConnect.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDBConnect.edmx</DependentUpon>
-      <LastGenOutput>ModelDBConnect.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ModelData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelData.edmx</DependentUpon>
+      <LastGenOutput>ModelData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelData.edmx</DependentUpon>
+      <LastGenOutput>ModelData.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,9 +23,17 @@ namespace MVCproject
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                       "~/Scripts/common.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                     "~/Scripts/jquery-ui-1.*"));
+
+            bundles.Add(new StyleBundle("~/Content/css/jqueryui")
+                   .Include("~/Content/jquery-ui-1*"));
         }
     }
 }

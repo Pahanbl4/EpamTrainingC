@@ -3,99 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Models;
 using Modell;
 
 namespace DAL.Repository
 {
-    public class ManagerRepository : ContextRepository, IRepository<DAL.Models.Manager, Modell.Manager>
+    public class ManagerRepository :VirtualRepository<Manager>
     {
-        public IEnumerable<Models.Manager> Items
+        public Manager GetByName(string name)
         {
-            get
+            using (var entity = new ModelDataEntities2())
             {
-                var b = new List<DAL.Models.Manager>();
-                foreach (var a in managersContext.Manager.Select(x => x))
-                {
-                    b.Add(ToObject(a));
-                }
-
-                return b;
+                return entity.Manager.FirstOrDefault(m => m.ManagerName == name);
             }
         }
 
-        public void Add(Models.Manager item)
+        public decimal GetSumById(int id)
         {
-            var entity = this.ToEntity(item);
-            managersContext.Manager.Add(entity);
-        }
-
-        public void Remove(Models.Manager item)
-        {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ID_Manager == item.ID_Manager);
-            if (entity != null)
+            using (var context = new ModelDataEntities2())
             {
-                managersContext.Manager.Remove(entity);
-            }
-            else
-            {
-                throw new ArgumentException("Incorrect argument!!!");
+                return context.Manager.FirstOrDefault(m => m.Id == id).SaleInfo.Sum(x => x.Sum);
             }
         }
 
-        public void Update(Models.Manager item)
+        public IEnumerable<SaleInfo> GetSalesByManagerId(int id)
         {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == item.ManagerName);
-            if (entity != null)
+            using (var context = new ModelDataEntities2())
             {
-                entity.ManagerName = item.ManagerName;
-            }
-            else
-            {
-                throw new ArgumentException("Incorrect argument!!!");
+                return context.Manager.FirstOrDefault(m => m.Id == id).SaleInfo.ToList();
             }
         }
 
-
-        public Modell.Manager GetEntity(Models.Manager source)
+        public Manager GetEntityNameById(int id)
         {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == source.ManagerName);
-            return entity;
-        }
-
-        public Modell.Manager GetEntityIDByName(string name)
-        {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == name);
-            return entity;
-        }
-
-        public Modell.Manager GetEntityNameById(int id)
-        {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ID_Manager == id);
-            return entity;
-        }
-
-
-        public Modell.Manager ToEntity(Models.Manager source)
-        {
-            return new Modell.Manager()
+            using (var entity = new ModelDataEntities2())
             {
-                ManagerName = source.ManagerName
-            };
-        }
+                return entity.Manager.FirstOrDefault(x => x.Id == id);
 
-        public Models.Manager ToObject(Modell.Manager source)
-        {
-            return new DAL.Models.Manager()
-            {
-                ManagerName = source.ManagerName
-            };
-        }
+            }
 
 
-        public void SaveChanges()
-        {
-            managersContext.SaveChanges();
         }
     }
 }

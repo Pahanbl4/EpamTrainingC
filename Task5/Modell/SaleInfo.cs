@@ -14,8 +14,9 @@ namespace Modell
     
     public partial class SaleInfo
     {
-        public int ID_Sale { get; set; }
-        public string SaleDate { get; set; }
+        public int Id { get; set; }
+        public System.DateTime Dato { get; set; }
+        public decimal Sum { get; set; }
         public Nullable<int> ID_Manager { get; set; }
         public Nullable<int> ID_Client { get; set; }
         public Nullable<int> ID_Product { get; set; }

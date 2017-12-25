@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="UserData">
+  <DataContextMoniker Name="/UserDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8d4b3b89-4c75-4e4c-9764-50ad3c9e840c" absoluteBounds="5.125, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/UserDataDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="651eb9d9-7a21-451c-b6c8-fb9979064645" absoluteBounds="5.14, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e79c72dc-6fe1-42d9-8589-7858d9193d6e" absoluteBounds="0.5, 0.625, 2, 2.5401025390625">
+      <DataClassMoniker Name="/UserDataDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fbf7b98f-76d5-4e3a-8eef-430d73f7a07e" absoluteBounds="0.51499999999999968, 1.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f92eabef-a027-4be9-949d-418744d5405a" absoluteBounds="2.625, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/UserDataDataContext/UserRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b3be8d21-1fc5-445d-aa0b-a4f3860ae676" absoluteBounds="2.64, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 1.69314697265625); (4.625 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/UserDataDataContext/Role/Role_UserRole" />
+      <nodes>
+        <classShapeMoniker Id="8d4b3b89-4c75-4e4c-9764-50ad3c9e840c" />
+        <classShapeMoniker Id="f92eabef-a027-4be9-949d-418744d5405a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 1.69314697265625); (2.625 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/UserDataDataContext/User/User_UserRole" />
+      <nodes>
+        <classShapeMoniker Id="e79c72dc-6fe1-42d9-8589-7858d9193d6e" />
+        <classShapeMoniker Id="f92eabef-a027-4be9-949d-418744d5405a" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

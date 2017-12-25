@@ -13,5 +13,9 @@ namespace MVCproject.Areas.Default.Controllers
         {
             return View();
         }
+        public ActionResult UserLogin()
+        {
+            return View(CurrentUser);
+        }
     }
 }

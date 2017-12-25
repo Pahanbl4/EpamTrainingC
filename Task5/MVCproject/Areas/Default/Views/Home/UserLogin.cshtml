@@ -1,0 +1,30 @@
+﻿@model Modell.UsersModel.Model.User
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">
+
+            @Html.ActionLink("X", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "close" })
+        </button>
+        <h4>Диалоговое окно</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            @if (Model != null)
+
+            {
+                <li>@Model.Email</li>
+                <li>@Html.ActionLink("Выход", "Logout", "Login")</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink("Вход", "Index", "Login")</li>
+                <li>@Html.ActionLink("Регистрация", "Register", "User")</li>
+            }
+        </dl>
+    </div>
+</div>
+
+
+

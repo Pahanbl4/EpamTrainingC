@@ -1,0 +1,34 @@
+﻿@model Dictionary<string, IEnumerable<MVCproject.Models.ManagerMVC>>
+
+<div id="ManagersPieChartAll" style="width: 700px; height: 500px;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+        $(document)
+            .ready(
+                function() {
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawManagersChart);
+                    google.charts.setOnLoadCallback(drawManagersLineChart);
+                });
+
+        function drawManagersChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Manager');
+            data.addColumn('number', 'Totall sum');
+            var options = {
+                title: 'The sum of sales for the whole period.',
+                is3D: true
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('ManagersPieChartAll'));
+            $.get('@Url.Action("GetChartData", "Manager")',
+                null,
+                function (dataJson, textStatus, jqXHR) {
+                    data.addRows(dataJson);
+                    chart.draw(data, options);
+                });
+        }
+
+
+</script>

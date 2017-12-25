@@ -1,0 +1,11 @@
+﻿@model DotNet.Highcharts.Highcharts
+@{
+    ViewBag.Title = "IndexPartial";
+    Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
+}
+<h2>Index1</h2>
+@(Model)
+@section Scripts {
+    @Scripts.Render("~/bundles/HighChart")
+    @Scripts.Render("~/bundles/highcharts")
+}

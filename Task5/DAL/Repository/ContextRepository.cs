@@ -9,16 +9,13 @@ namespace DAL.Repository
 {
     public class ContextRepository : IDisposable
     {
-        protected ModelDataEntities managersContext;
+        protected ModelDataEntities2 managersContext;
         public ContextRepository()
         {
-            managersContext = new ModelDataEntities();
+            managersContext = new ModelDataEntities2();
         }
 
-        ~ContextRepository()
-        {
-            managersContext.Dispose();
-        }
+       
 
         public void Dispose()
         {

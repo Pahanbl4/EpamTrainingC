@@ -1,0 +1,50 @@
+﻿@model Dictionary<string, IEnumerable<MVCproject.Models.ManagerMVC>>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading_@item.Key">
+                
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.Key" aria-expanded="false" aria-controls="collapse_@item.Key">
+                        @Html.DisplayFor(modelItem => item.Key)
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse_@item.Key" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.Key">
+                <div>
+                    @foreach (var product in item.Value)
+                    {
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(Model => product.Name)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(Model => product.Name)
+                            </dd>
+
+                            <dd>
+                                @Html.ActionLink("Details", "Details", new { id = product.Id })
+                            </dd>
+                           
+                                <dd>
+                                    @Html.ActionLink("Edit", "Edit", new { id = product.Id })
+                                </dd>
+                                <dd>
+                                    @Html.ActionLink("Delete", "Delete", new { id = product.Id })
+                                </dd>
+                            
+                        </dl>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

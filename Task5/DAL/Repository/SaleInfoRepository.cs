@@ -1,112 +1,52 @@
-﻿using System;
+﻿using Modell;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Models;
-using Modell;
 
 namespace DAL.Repository
 {
-    public class SaleInfoRepository : ContextRepository, IRepository<DAL.Models.SaleInfo, Modell.SaleInfo>
+    public class SaleInfoRepository : VirtualRepository<SaleInfo>
     {
-        public IEnumerable<Models.SaleInfo> Items
+        protected ModelDataEntities2 managersContext;
+
+        Modell.SaleInfo ToObject(Modell.SaleInfo source)
+        {
+            return new Modell.SaleInfo()
+            {
+                Dato = source.Dato,
+                ID_Manager = source.ID_Manager,
+                ID_Client = source.ID_Client,
+                ID_Product = source.ID_Product
+            };
+        }
+
+        public IEnumerable<Modell.SaleInfo> Items
         {
             get
             {
-                var b = new List<DAL.Models.SaleInfo>();
+                var b = new List<Modell.SaleInfo>();
                 foreach (var a in this.managersContext.SaleInfo.Select(x => x))
                 {
                     b.Add(ToObject(a));
                 }
 
-                return b;             
+                return b;
+                //return this.managersContext.SaleInfo.Select(x => this.ToObject(x));
             }
         }
 
-        public void Add(Models.SaleInfo item)
+        public SaleInfo GetEntityNameById(int id)
         {
-            var entity = this.ToEntity(item);
-            managersContext.SaleInfo.Add(entity);
-        }
-
-        public void Remove(Models.SaleInfo item)
-        {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == item.ID_Sale);
-            if (entity != null)
+            using (var entity = new ModelDataEntities2())
             {
-                managersContext.SaleInfo.Remove(entity);
+                return entity.SaleInfo.FirstOrDefault(x => x.Id == id);
+
             }
-            else
-            {
-                throw new ArgumentException("Incorrect argument!!!");
-            }
+
+
         }
 
-        public void Update(Models.SaleInfo item)
-        {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == item.ID_Sale);
-            if (entity != null)
-            {
-                entity.SaleDate = item.SaleDate;
-                entity.ID_Manager = item.ID_Manager;
-                entity.ID_Client = item.ID_Client;
-                entity.ID_Product = item.ID_Product;
-            }
-            else
-            {
-                throw new ArgumentException("Incorrect argument!!!");
-            }
-        }
-
-        
-
-        public Modell.SaleInfo GetEntity(Models.SaleInfo source)
-        {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == source.ID_Sale);
-            return entity;
-        }
-
-        public Modell.SaleInfo GetEntityIDByName(string name)
-        {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.Manager.ManagerName == name);
-            return entity;
-        }
-
-        public Modell.SaleInfo GetEntityNameById(int id)
-        {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == id);
-            return entity;
-        }
-
-       
-    
-        public Modell.SaleInfo ToEntity(Models.SaleInfo source)
-        {
-            return new Modell.SaleInfo()
-            {
-                SaleDate = source.SaleDate,
-                ID_Manager = source.ID_Manager,
-                ID_Client = source.ID_Client,
-                ID_Product = source.ID_Product
-            };
-        }
-
-        public Models.SaleInfo ToObject(Modell.SaleInfo source)
-        {
-            return new DAL.Models.SaleInfo()
-            {
-                SaleDate = source.SaleDate,
-                ID_Manager = source.ID_Manager,
-                ID_Client = source.ID_Client,
-                ID_Product = source.ID_Product
-            };
-        }
-
-
-        public void SaveChanges()
-        {
-            managersContext.SaveChanges();
-        }
     }
 }

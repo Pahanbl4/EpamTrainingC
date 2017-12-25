@@ -12,6 +12,6 @@ namespace Modell.UsersModel.Model
     {
 
        [Inject]
-       public UsersDataDataContext Db { get; set; }
+       public UserDataDataContext Db { get; set; }
     }
 }

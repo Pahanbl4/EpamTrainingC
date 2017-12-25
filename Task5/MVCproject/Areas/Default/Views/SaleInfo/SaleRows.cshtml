@@ -1,0 +1,23 @@
+﻿
+@model MVCproject.Models.SaleRowsModel
+
+@foreach (var item in Model.ListRow)
+{
+    <tr>
+        <td>
+            @item.ManagerName
+        </td>
+        <td>
+            @item.Date
+        </td>
+        <td>
+            @item.ClientName
+        </td>
+        <td>
+            @item.ProductName
+        </td>
+        <td>
+            @item.ProductCost
+        </td>
+    </tr>
+}

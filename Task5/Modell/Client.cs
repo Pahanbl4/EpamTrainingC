@@ -20,7 +20,7 @@ namespace Modell
             this.SaleInfo = new HashSet<SaleInfo>();
         }
     
-        public int ID_Client { get; set; }
+        public int Id { get; set; }
         public string ClientName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
