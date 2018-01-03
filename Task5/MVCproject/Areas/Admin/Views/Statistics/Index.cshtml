@@ -1,34 +1,73 @@
 ﻿@model Dictionary<string, IEnumerable<MVCproject.Models.ManagerMVC>>
 
-<div id="ManagersPieChartAll" style="width: 700px; height: 500px;"></div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-        $(document)
-            .ready(
-                function() {
-                    google.charts.load('current', { 'packages': ['corechart'] });
-                    google.charts.setOnLoadCallback(drawManagersChart);
-                    google.charts.setOnLoadCallback(drawManagersLineChart);
-                });
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-        function drawManagersChart() {
+<br>
 
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Manager');
-            data.addColumn('number', 'Totall sum');
-            var options = {
-                title: 'The sum of sales for the whole period.',
-                is3D: true
-            };
-            var chart = new google.visualization.PieChart(document.getElementById('ManagersPieChartAll'));
-            $.get('@Url.Action("GetChartData", "Manager")',
-                null,
-                function (dataJson, textStatus, jqXHR) {
-                    data.addRows(dataJson);
-                    chart.draw(data, options);
-                });
-        }
+<div>
+    <h1>Column Chart</h1>
+</div>
 
+<div>
+    <img src="@Url.Action("ChartColumn")" alt="Chart" />
+</div>
+<hr />
 
-</script>
+<div>
+    <h1>Bar Chart</h1>
+</div>
+
+<div>
+    <img src="@Url.Action("ChartBar")" alt="Chart" />
+</div>
+<hr />
+
+<div>
+    <h1>Pie Chart</h1>
+</div>
+
+<div>
+    <img src="@Url.Action("ChartPie")" alt="Chart" />
+</div>
+<hr />
+
+<div>
+    <h1>Three Line Chart</h1>
+</div>
+
+<div>
+    <img src="@Url.Action("ChartThree")" alt="Chart" />
+</div>
+<hr />
+
+<div>
+    <h1>Bubble Chart</h1>
+</div>
+
+<div>
+    <img src="@Url.Action("ChartBubble")" alt="Chart" />
+</div>
+<hr />
+
+<div>
+    <h1>Doughnut Chart</h1>
+</div>
+
+<div>
+    <img src="@Url.Action("ChartDoughnut")" alt="Chart" />
+</div>
+<hr />
+
+<div>
+    <h1>Radar Chart</h1>
+</div>
+
+<div>
+    <img src="@Url.Action("ChartRadar")" alt="Chart" />
+</div>
+<hr />
+

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-my navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,8 +26,14 @@
                     <div id="dialogContent" class="modal-dialog"></div>
                 </div>
                 <ul>
-                    <br>
-                    <a href="@Url.Action("UserLogin", "Home")">Login</a>
+
+
+                    @Html.ActionLink("Login", "UserLogin", "Home", routeValues: null, htmlAttributes: new { @class = "navbar-brand" })
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Adminka", "Index", "Admin", routeValues: null, htmlAttributes: new { @class = "navbar-brand" })
+                    }
+
                 </ul>
 
             </div>
@@ -37,12 +44,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ASP.NET By Pavel Mankialevich</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </body>
 </html>

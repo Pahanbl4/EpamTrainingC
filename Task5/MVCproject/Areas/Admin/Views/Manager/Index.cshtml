@@ -1,5 +1,9 @@
 ﻿@model Dictionary<string, IEnumerable<MVCproject.Models.ManagerMVC>>
-
+@{
+   
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<br>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -9,7 +13,7 @@
     {
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading_@item.Key">
-                
+
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.Key" aria-expanded="false" aria-controls="collapse_@item.Key">
                         @Html.DisplayFor(modelItem => item.Key)
@@ -18,27 +22,27 @@
             </div>
             <div id="collapse_@item.Key" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.Key">
                 <div>
-                    @foreach (var product in item.Value)
+                    @foreach (var manager in item.Value)
                     {
                         <dl class="dl-horizontal">
                             <dt>
-                                @Html.DisplayNameFor(Model => product.Name)
+                                @Html.DisplayNameFor(Model => manager.Name)
                             </dt>
                             <dd>
-                                @Html.DisplayFor(Model => product.Name)
+                                @Html.DisplayFor(Model => manager.Name)
                             </dd>
 
                             <dd>
-                                @Html.ActionLink("Details", "Details", new { id = product.Id })
+                                @Html.ActionLink("Details", "Details", new { id = manager.Id })
                             </dd>
-                           
-                                <dd>
-                                    @Html.ActionLink("Edit", "Edit", new { id = product.Id })
-                                </dd>
-                                <dd>
-                                    @Html.ActionLink("Delete", "Delete", new { id = product.Id })
-                                </dd>
-                            
+
+                            <dd>
+                                @Html.ActionLink("Edit", "Edit", new { id = manager.Id })
+                            </dd>
+                            <dd>
+                                @Html.ActionLink("Delete", "Delete", new { id = manager.Id })
+                            </dd>
+
                         </dl>
                     }
                 </div>

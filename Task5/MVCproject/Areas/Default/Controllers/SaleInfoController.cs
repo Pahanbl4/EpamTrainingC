@@ -1,8 +1,10 @@
 ﻿using DAL.Repository;
+using Modell;
 using MVCproject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,61 +13,61 @@ namespace MVCproject.Areas.Default.Controllers
     public class SaleInfoController : DefaultController
     {
 
-     /*   IRepository<DAL.Models.Manager, Modell.Manager> managerRepository;
-        IRepository<DAL.Models.Client, Modell.Client> clientRepository;
-        IRepository<DAL.Models.Product, Modell.Product> productRepository;
-        IRepository<DAL.Models.SaleInfo, Modell.SaleInfo> saleInfoRepository;
-
-        public SaleInfoController()
-        {
-            managerRepository = new ManagerRepository();
-            clientRepository = new ClientRepository();
-            productRepository = new ProductRepository();
-            saleInfoRepository = new SaleInfoRepository();
-        }
-        //
-        // GET: /Default/SaleInfo/
-
         public ActionResult Index()
         {
-            SaleInfoModel saleInfoModel = new SaleInfoModel();
-            saleInfoModel.Managers = managerRepository.Items;
-            saleInfoModel.Products = productRepository.Items;
-            return View(saleInfoModel);
+            var products = new DAL.Repository.ProductRepository()
+               .GetAll()
+               .GroupBy(p => p.ProductName.Substring(0, 1))
+               .Select(p => new { k = p.Key, value = p })
+               .ToDictionary(
+                   p => p.k,
+                   p => p.value.Select(
+                       x => new Models.ProductMVC()
+                       { Id = x.Id, Name = x.ProductName }));
+            return View(products);
         }
 
-        public ActionResult GetByFilter(string manager, string product, string date)
+        // GET: Admin/Product/Details/5
+        public ActionResult Details(int? id)
         {
-            SaleRowsModel saleRowsModel = new SaleRowsModel();
-            var newManager = managerRepository.GetEntity(new DAL.Models.Manager() { ManagerName = manager });
-            if (newManager != null)
+            if (id == null)
             {
-                var dataM = saleInfoRepository.Items.Where(x => x.ID_Manager == newManager.ID_Manager);
-
-                foreach (var saleInfo in dataM)
-                {
-                    var newDate = saleInfo.SaleDate;
-                    var managerName = managerRepository.GetEntityNameById(saleInfo.ID_Manager.Value);
-                    var clientName = clientRepository.GetEntityNameById(saleInfo.ID_Client.Value);
-                    var newProduct = productRepository.GetEntityNameById(saleInfo.ID_Product.Value);
-                    saleRowsModel.ListRow.Add(new SaleRowModel() { ManagerName = managerName.ManagerName, Date = newDate, ClientName = clientName.ClientName, ProductName = newProduct.ProductName, ProductCost = newProduct.ProductCost });
-                }
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (!string.IsNullOrEmpty(product) && !product.Equals("-"))
+
+            var productId = id ?? default(int);
+
+            var product = new DAL.Repository.ProductRepository()
+                .GetById(productId)
+                .Select(y => new Models.ProductMVC() { Id = y.Id, Name = y.ProductName })
+                .FirstOrDefault();
+
+            if (product == null)
             {
-                saleRowsModel.ListRow = saleRowsModel.ListRow.Where(x => x.ProductName.Equals(product)).ToList();
+                return HttpNotFound();
             }
-            if (!string.IsNullOrEmpty(date))
-            {
-                saleRowsModel.ListRow = saleRowsModel.ListRow.Where(x => x.Date.Contains(date)).ToList();
-            }
-            return View("~/Areas/Default/Views/Saleinfo/SaleRows.cshtml", saleRowsModel);
-        }*/
+            return View(product);
+        }
 
-        public ActionResult IndexPartial()
+        // GET: Admin/Product/Create
+        public ActionResult Create()
         {
             return View();
+        }
+
+        // POST: Admin/Product/Create
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "Id,Name")] Models.ProductMVC product)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = new Product() { Id = product.Id, ProductName = product.Name };
+                new DAL.Repository.ProductRepository()
+                    .Insert(item);
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
         }
 
     }

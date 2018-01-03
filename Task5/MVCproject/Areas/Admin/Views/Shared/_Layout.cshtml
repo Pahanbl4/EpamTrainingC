@@ -2,55 +2,61 @@
     var currentUser = ((MVCproject.Controllers.BaseController)ViewContext.Controller).CurrentUser;
 }
 
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
-    @*<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />*@
-    @Styles.Render("~/Content/css/jqueryui")
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <div class="btn-group pull-right">
-                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="icon-user">
-                        </i>
-                        @currentUser.Email<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/">На сайт</a></li>
-                        <li>
-                            <a href="@Url.Action("Logout", "Login", new { area = "Default" })">Выход</a>
-                        </li>
-                    </ul>
+    <div class="navbar navbar-my navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+
+
+                </button>
+                @Html.ActionLink("Admin Menu", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "navbar-brand" })
+
+            </div>
+            <div class="navbar-right">
+                <div id="modDialog" class="modal fade">
+                    <div id="dialogContent" class="modal-dialog"></div>
                 </div>
+
+                <a class="btn btn-prim dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user">
+                    </i>
+                    @currentUser.Email<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu a">
+                    <li><a href="/">На сайт</a></li>
+                    <li>
+                        <a href="@Url.Action("Logout", "Login", new { area = "Default" })">Выход</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span3">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">        
-                    @*@Html.Action("LangMenu", "Home")*@
-                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="span9">
-                @RenderBody()
-            </div>
-        </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ASP.NET By Pavel Mankialevich</p>
+        </footer>
     </div>
+
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </body>
 </html>

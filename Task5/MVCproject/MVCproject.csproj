@@ -223,7 +223,6 @@
     <Compile Include="Areas\Admin\Controllers\StatisticsController.cs" />
     <Compile Include="Areas\Default\Controllers\AdminController.cs" />
     <Compile Include="Areas\Default\Controllers\DefaultController.cs" />
-    <Compile Include="Areas\Default\Controllers\DemoController.cs" />
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\LoginController.cs" />
     <Compile Include="Areas\Default\Controllers\RoleController.cs" />
@@ -243,7 +242,7 @@
     <Compile Include="Global\Auth\UserProvider.cs" />
     <Compile Include="Mappers\CommonMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
-    <Compile Include="Models\AjaxOnlyAttribute.cs" />
+    <Compile Include="Attribute\Validation\AjaxOnlyAttribute.cs" />
     <Compile Include="Models\ClientMVC.cs" />
     <Compile Include="Models\ManagerMVC.cs" />
     <Compile Include="Models\ProductMVC.cs" />
@@ -315,8 +314,6 @@
     <Content Include="Areas\Default\Views\Home\UserLogin.cshtml" />
     <Content Include="Areas\Default\Views\Login\Ajax.cshtml" />
     <Content Include="Areas\Default\Views\Shared\_Ok.cshtml" />
-    <Content Include="Areas\Default\Views\Demo\Index.cshtml" />
-    <Content Include="Areas\Default\Views\Demo\IndexPartial.cshtml" />
     <Content Include="Areas\Default\Views\SaleInfo\Index.cshtml" />
     <Content Include="Areas\Default\Views\SaleInfo\SaleRows.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -393,8 +390,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -406,8 +404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Default\Models\" />
     <Folder Include="Areas\Default\Views\Default\" />
     <Folder Include="Scripts\admin\" />
     <Folder Include="Views\Shared\" />

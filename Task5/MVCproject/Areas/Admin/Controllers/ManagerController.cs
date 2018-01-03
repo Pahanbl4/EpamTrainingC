@@ -15,18 +15,10 @@ namespace MVCproject.Areas.Admin.Controllers
      
     public class ManagerController : BaseController
     {
-        
 
-
-        [HttpGet]
+    
         public ActionResult Index()
         {
-
-
-            //var list = saleInfoRepository.Items.OrderByDescending(x => x.ID_Sale);
-           
-
-
             var sales = new ManagerRepository()
                 .GetAll()
                 .GroupBy(p => p.ManagerName.Substring(0, 1))
@@ -36,52 +28,12 @@ namespace MVCproject.Areas.Admin.Controllers
                     p => p.value.Select(
                         x => new MVCproject.Models.ManagerMVC
                         { Id = x.Id, Name = x.ManagerName }));
-            //var newManager = managerRepository.GetEntity(new DAL.Models.Manager() { ManagerName = manager });
-            //if (newManager != null)
-            //{
-            // var dataM = new SaleInfoRepository().Items.Select(x => x);
-
-            //Modell.Manager _managerName = new Manager();
-            //Modell.SaleInfo _saleInfo = new SaleInfo();
-            //Modell.Product _product = new Product();
-            //Modell.Client _client = new Client();
-
-            //foreach (var saleInfo in dataM)
-            //{
-            //    var newDate = saleInfo.Dato;
-            //    var  managerName = new ManagerRepository().GetEntityNameById(saleInfo.ID_Manager.Value);
-            //    var clientName = new ClientRepository().GetEntityNameById(saleInfo.ID_Client.Value);
-            //    var newProduct = new ProductRepository().GetEntityNameById(saleInfo.ID_Product.Value);
-            //    var productSum = new SaleInfoRepository().GetEntityNameById(saleInfo.Id);
-
-
-
-            //    saleRowsModel.ListRow.Add(new SaleRowModel()
-            //    {
-            //        ManagerName = managerName.ManagerName,
-            //        Date = newDate,
-            //        ClientName = clientName.ClientName,
-            //        ProductName = newProduct.ProductName,
-            //        ProductSum = productSum.Sum
-            //    });
-            //}
-
+           
 
             return View(sales);
         }
 
-
-
-        //// GET: Admin/Manager
-       
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        // GET: Admin/Manager/Details/5
-        [AjaxOnly]
-        [HttpGet]
+    
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -104,21 +56,20 @@ namespace MVCproject.Areas.Admin.Controllers
         }
 
         // GET: Admin/Manager/Create
-        [HttpGet]
-        [AjaxOnly]
+    
         public ActionResult Create()
         {
             return PartialView();
         }
 
         // POST: Admin/Manager/Create
-        [AjaxOnly]
+
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,ManagerName")] Manager manager)
+        public ActionResult Create([Bind(Include = "Id,Name")] Models.ManagerMVC manager)
         {
             if (ModelState.IsValid)
             {
-                var item = new Modell.Manager() { Id = manager.Id, ManagerName = manager.ManagerName };
+                var item = new Manager() { Id = manager.Id, ManagerName = manager.Name };
                 new DAL.Repository.ManagerRepository()
                     .Insert(item);
 
@@ -209,6 +160,7 @@ namespace MVCproject.Areas.Admin.Controllers
         }
 
         // POST: Admin/Manager/Delete/5
+        [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Delete")]
 
         public ActionResult DeleteConfirmed(int id)

@@ -33,15 +33,6 @@ namespace DAL.Repository
             }
         }
 
-        public Manager GetEntityNameById(int id)
-        {
-            using (var entity = new ModelDataEntities2())
-            {
-                return entity.Manager.FirstOrDefault(x => x.Id == id);
-
-            }
-
-
-        }
+      
     }
 }

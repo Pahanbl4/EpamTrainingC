@@ -37,16 +37,7 @@ namespace DAL.Repository
             }
         }
 
-        public SaleInfo GetEntityNameById(int id)
-        {
-            using (var entity = new ModelDataEntities2())
-            {
-                return entity.SaleInfo.FirstOrDefault(x => x.Id == id);
-
-            }
-
-
-        }
+       
 
     }
 }

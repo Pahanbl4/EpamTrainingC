@@ -42,7 +42,7 @@ namespace MVCproject.Areas.Default.Controllers
                 var user = (User)ModelMapper.Map(userView, typeof(UserView), typeof(User));
 
                 Repository.CreateUser(user);
-                Repository.CreateUserRole(new UserRole { IdUser = user.IdUser, IdRole = 2 });
+                Repository.CreateUserRole(new UserRole { IdUser = user.IdUser, IdRole = 3 });
                 return RedirectToAction("Index");
             }
             return View(userView);

@@ -1,59 +1,44 @@
-﻿@model MVCproject.Models.SaleInfoModel
+﻿@model Dictionary<string, IEnumerable<MVCproject.Models.ProductMVC>>
 @{
-    ViewBag.Title = "SaleInfo";
+    ViewBag.Title = "Product List";
     Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
 }
-<h2>SaleInfo</h2>
 
-<table id="datatable"></table>
+<br>
 
-@Html.DropDownList("Managers", Model.Managers.Select(x => new SelectListItem()
-{
-    Text = x.ManagerName,
-    Value = x.ManagerName
-}))
-@{
-    var a = new List<SelectListItem>(){new SelectListItem
-{
-Text = "-",
-Value = "-"
-}};
-    a.AddRange(Model.Products.Select(x => new SelectListItem()
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    @foreach (var item in Model)
     {
-        Text = x.ProductName,
-        Value = x.ProductName
-    }).ToList());
-}
-@Html.DropDownList("Products", a)
-Date: <input type="text" id="datepicker">
-@*@Html.ActionLink("DemoChart", "IndexPartial", "Demo")*@
-@Html.ActionLink("Sales information", "Index", "Demo")
-@*@{Html.RenderPartial("~/Areas/Default/Demo/IndexPartial.cshtml");}*@
-<script type="text/javascript">
-    $('#Managers').bind("change", function (e) {
-        CustomLoad();
-    });
-    $('#Products').bind("change", function (e) {
-        CustomLoad();
-    });
-    $('#datepicker').bind("change", function (e) {
-        CustomLoad();
-    });
-    function CustomLoad()
-    {
-        $.ajax({
-            url: "/SaleInfo/GetByFilter",
-            data: {
-                manager: $('#Managers')[0].value,
-                product: $('#Products')[0].value,
-                date: $("#datepicker").val()
-            },
-            success: function (data) {
-                $('#datatable')[0].innerHTML = data;
-            }
-        });
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading_@item.Key">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.Key" aria-expanded="false" aria-controls="collapse_@item.Key">
+                        @Html.DisplayFor(modelItem => item.Key)
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse_@item.Key" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.Key">
+                <div class="panel-body">
+                    @foreach (var product in item.Value)
+                    {
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(Model => product.Name)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(Model => product.Name)
+                            </dd>
+
+                            <dd>
+                                @Html.ActionLink("SaleRows", "SaleInfo", new { id = product.Id })
+                            </dd>
+
+                            
+
+                        </dl>
+                    }
+                </div>
+            </div>
+        </div>
     }
-    $(function () {
-        $("#datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
-    });
-</script>
+</div>

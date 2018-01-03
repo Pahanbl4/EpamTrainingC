@@ -6,10 +6,10 @@
 <h2>LessonProject</h2>
 
 <p>
-    <div class="menu">
-        <a href="@Url.Action("Index", "Role", new { id = "1" })">Роли</a>
-        @Html.ActionLink("Пользователи", "Index", "User")
-        @Html.ActionLink("Info", "Index", "SaleInfo")
-    </div>
+    @Html.ActionLink("Пользователи", "Index", "User", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("Роли", "Index", "Role", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+    @Html.ActionLink("Информация о покупках", "Index", "SaleInfo", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+
 
 </p>
+

@@ -17,15 +17,6 @@ namespace DAL.Repository
             }
         }
 
-        public Client GetEntityNameById(int id)
-        {
-            using (var entity = new ModelDataEntities2())
-            {
-                return entity.Client.FirstOrDefault(x => x.Id == id);
-                
-            }
-           
-            
-        }
+       
     }
 }

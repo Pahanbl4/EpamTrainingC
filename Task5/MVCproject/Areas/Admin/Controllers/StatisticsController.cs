@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
+using System.Collections;
+using Modell;
 
 namespace MVCproject.Areas.Admin.Controllers
 {
@@ -16,35 +19,133 @@ namespace MVCproject.Areas.Admin.Controllers
             return View();
         }
 
-        [AjaxOnly]
-        public JsonResult GetChartData(int? id)
+       
+        public ActionResult ChartColumn()
         {
-            if (id == null)
-            {
-                var items = new DAL.Repository.ManagerRepository()
-                    .GetAll()
-                    .Select(d => new object[]
-                    {
-                        d.ManagerName,
-                        new DAL.Repository.ManagerRepository()
-                        .GetSumById(d.Id)
-                    })
-                    .ToArray();
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            var result = (from c in _context.SaleInfo select c);
 
-                return Json(items, JsonRequestBehavior.AllowGet);
-            }
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
 
-            int idManager = id ?? default(int);
+            new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+                .AddTitle("Chart for Growth [column chart]")
+                .AddSeries("Default", chartType: "Column", xValue: xxx, yValues: yyy)
+                .Write("bmp");
 
-            var sales = new DAL.Repository.ManagerRepository()
-                .GetSalesByManagerId(idManager)
-                .OrderBy(x => x.Dato)
-                .GroupBy(x => x.Dato.Date)
-                .Select(d => new object[] { d.Key, d.Sum(s => s.Sum) })
-                .ToArray();
-
-            return Json(sales, JsonRequestBehavior.AllowGet);
+            return null;
         }
 
+        public ActionResult ChartBar()
+        {
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            var result = (from c in _context.SaleInfo select c);
+
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Yellow)
+                .AddTitle("Chart for Growth [Bar chart]")
+                .AddSeries("Default", chartType: "Bar", xValue: xxx, yValues: yyy)
+                .Write("bmp");
+
+            return null;
+        }
+
+        public ActionResult ChartPie()
+        {
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            var result = (from c in _context.SaleInfo select c);
+
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+                .AddTitle("Chart for Growth [Pie chart]")
+                .AddSeries("Default", chartType: "Pie", xValue: xxx, yValues: yyy)
+                .Write("bmp");
+
+            return null;
+        }
+
+        public ActionResult ChartThree()
+        {
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            var result = (from c in _context.SaleInfo select c);
+
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Green)
+                .AddTitle("Chart for Growth [Three Line chart]")
+                .AddSeries("Default", chartType: "Candlestick", xValue: xxx, yValues: yyy)
+                .Write("bmp");
+
+            return null;
+        }
+
+        public ActionResult ChartBubble()
+        {
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            var result = (from c in _context.SaleInfo select c);
+
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Green)
+                .AddTitle("Chart for Growth [Bubble chart]")
+                .AddSeries("Default", chartType: "Bubble", xValue: xxx, yValues: yyy)
+                .Write("bmp");
+
+            return null;
+        }
+
+        public ActionResult ChartDoughnut()
+        {
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            var result = (from c in _context.SaleInfo select c);
+
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Vanilla3D)
+                .AddTitle("Chart for Growth [Doughnut chart]")
+                .AddSeries("Default", chartType: "Doughnut", xValue: xxx, yValues: yyy)
+                .Write("bmp");
+
+            return null;
+        }
+
+        public ActionResult ChartRadar()
+        {
+            var _context = new ModelDataEntities2();
+            ArrayList xxx = new ArrayList();
+            ArrayList yyy = new ArrayList();
+            
+            var result = (from c in _context.SaleInfo select c);
+            
+            result.ToList().ForEach(rs => xxx.Add(rs.Dato));
+            result.ToList().ForEach(rs => yyy.Add(rs.Sum));
+      
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+                .AddTitle("Chart for Growth [Radar chart]")
+                .AddSeries("Default", chartType: "Radar",legend:"Name", xValue: xxx, yValues: yyy)
+                .Write("bmp");
+
+            return null;
+        }
     }
 }

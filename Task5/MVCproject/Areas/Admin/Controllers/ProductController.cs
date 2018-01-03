@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DAL;
 using Modell;
 using MVCproject.Controllers;
+using MVCproject.Models;
 
 namespace MVCproject.Areas.Admin.Controllers
 {
@@ -70,7 +71,19 @@ namespace MVCproject.Areas.Admin.Controllers
             return View(product);
         }
 
+        [AjaxOnly]
+        [HttpGet]
+        public ActionResult ManagerList()
+        {
+            var item = new DAL.Repository.ManagerRepository()
+                .GetAll()
+                .Select(x => new Manager() { Id = x.Id, ManagerName = x.ManagerName });
+            return PartialView("PartialManagerList", item);
+        }
+
         // GET: Admin/Product/Edit/5
+        [AjaxOnly]
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,7 +106,8 @@ namespace MVCproject.Areas.Admin.Controllers
 
         // POST: Admin/Product/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Title")] Models.ProductMVC product)
+        [AjaxOnly]
+        public ActionResult Edit([Bind(Include = "Id,Name")] Models.ProductMVC product)
         {
             if (ModelState.IsValid)
             {
@@ -114,6 +128,8 @@ namespace MVCproject.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product/Delete/5
+        [AjaxOnly]
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)

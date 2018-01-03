@@ -34,3 +34,48 @@
 .select-year {
     width: 70px;
 }
+
+.navbar-my {
+     background: #958332;
+    
+}
+
+.navbar-my ul li a {
+     color: #fff;
+    
+}
+
+.navbar-my ul li a:hover {
+    background: #333;
+    
+}
+
+.navbar-my .navbar-brand {
+    color: #fff;
+   
+}
+
+.dropdown-menu a {
+    color: #000000 !important;
+}
+
+.dropdown-menu a:hover {
+    color: #000000 !important;
+}
+
+.btn-prim {
+    background-color: #6d5b08;
+    color: #000000;
+}
+
+.btn-prim:hover,
+
+.btn-prim:focus,
+
+.btn-prim:visited{
+
+background-color: green;
+
+color: white;
+
+}
