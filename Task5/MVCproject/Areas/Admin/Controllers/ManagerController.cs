@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using MVCproject.Models;
 using System.Net;
-using Modell;
+
 using MVCproject.Controllers;
-using DAL.Repository;
+
 
 namespace MVCproject.Areas.Admin.Controllers
 {
@@ -19,7 +19,7 @@ namespace MVCproject.Areas.Admin.Controllers
     
         public ActionResult Index()
         {
-            var sales = new ManagerRepository()
+            var sales = new DAL.Repository.ManagerRepository()
                 .GetAll()
                 .GroupBy(p => p.ManagerName.Substring(0, 1))
                 .Select(p => new { k = p.Key, value = p })
@@ -45,7 +45,7 @@ namespace MVCproject.Areas.Admin.Controllers
 
             var manager = new DAL.Repository.ManagerRepository()
                 .GetById(managerId)
-                .Select(y => new Manager() { Id = y.Id, ManagerName = y.ManagerName })
+                .Select(y => new ManagerMVC() { Id = y.Id, Name = y.ManagerName })
                 .FirstOrDefault();
 
             if (manager == null)
@@ -69,7 +69,7 @@ namespace MVCproject.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var item = new Manager() { Id = manager.Id, ManagerName = manager.Name };
+                var item = new Modell.Manager() { Id = manager.Id, ManagerName = manager.Name };
                 new DAL.Repository.ManagerRepository()
                     .Insert(item);
 
@@ -79,19 +79,17 @@ namespace MVCproject.Areas.Admin.Controllers
             return PartialView(manager);
         }
 
-        [AjaxOnly]
-        [HttpGet]
+      
         public ActionResult ManagerList()
         {
             var item = new DAL.Repository.ManagerRepository()
                 .GetAll()
-                .Select(x => new Manager() { Id = x.Id, ManagerName = x.ManagerName });
+                .Select(x => new ManagerMVC() { Id = x.Id, Name = x.ManagerName });
             return PartialView("PartialManagerList", item);
         }
 
         // GET: Admin/Manager/Edit/5
-        [AjaxOnly]
-        [HttpGet]
+    
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -102,7 +100,7 @@ namespace MVCproject.Areas.Admin.Controllers
             var managerId = id ?? default(int);
 
             var manager = new DAL.Repository.ManagerRepository()
-                .GetById(managerId).Select(x => new Manager() { Id = x.Id, ManagerName = x.ManagerName })
+                .GetById(managerId).Select(x => new ManagerMVC() { Id = x.Id, Name = x.ManagerName })
                 .FirstOrDefault();
 
             if (manager == null)
@@ -114,8 +112,8 @@ namespace MVCproject.Areas.Admin.Controllers
 
         // POST: Admin/Manager/Edit/5
         [HttpPost]
-        [AjaxOnly]
-        public ActionResult Edit([Bind(Include = "Id,ManagerName")] Manager manager)
+   
+        public ActionResult Edit([Bind(Include = "Id,Name")] ManagerMVC manager)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +123,7 @@ namespace MVCproject.Areas.Admin.Controllers
 
                 if (item != null)
                 {
-                    item.ManagerName = manager.ManagerName;
+                    item.ManagerName = manager.Name;
                     new DAL.Repository.ManagerRepository()
                         .Update(item);
 
@@ -136,8 +134,7 @@ namespace MVCproject.Areas.Admin.Controllers
         }
 
         // GET: Admin/Manager/Delete/5
-        [AjaxOnly]
-        [HttpGet]
+       
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -149,7 +146,7 @@ namespace MVCproject.Areas.Admin.Controllers
 
             var manager = new DAL.Repository.ManagerRepository()
                 .GetById(managerId)
-                .Select(m => new Manager() { Id = m.Id, ManagerName = m.ManagerName })
+                .Select(m => new ManagerMVC() { Id = m.Id, Name = m.ManagerName })
                 .FirstOrDefault();
 
             if (manager == null)
@@ -160,7 +157,7 @@ namespace MVCproject.Areas.Admin.Controllers
         }
 
         // POST: Admin/Manager/Delete/5
-        [ValidateAntiForgeryToken]
+      
         [HttpPost, ActionName("Delete")]
 
         public ActionResult DeleteConfirmed(int id)

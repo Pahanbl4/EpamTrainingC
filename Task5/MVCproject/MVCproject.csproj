@@ -226,7 +226,7 @@
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\LoginController.cs" />
     <Compile Include="Areas\Default\Controllers\RoleController.cs" />
-    <Compile Include="Areas\Default\Controllers\SaleInfoController.cs" />
+    <Compile Include="Areas\Default\Controllers\SaleInfoesController.cs" />
     <Compile Include="Areas\Default\Controllers\UserController.cs" />
     <Compile Include="Areas\Default\DefaultAreaRegistration.cs" />
     <Compile Include="Attribute\Validation\ValidEmail.cs" />
@@ -314,8 +314,6 @@
     <Content Include="Areas\Default\Views\Home\UserLogin.cshtml" />
     <Content Include="Areas\Default\Views\Login\Ajax.cshtml" />
     <Content Include="Areas\Default\Views\Shared\_Ok.cshtml" />
-    <Content Include="Areas\Default\Views\SaleInfo\Index.cshtml" />
-    <Content Include="Areas\Default\Views\SaleInfo\SaleRows.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AdminMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
@@ -333,6 +331,11 @@
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Statistics\Index.cshtml" />
+    <Content Include="Areas\Default\Views\SaleInfoes\Create.cshtml" />
+    <Content Include="Areas\Default\Views\SaleInfoes\Delete.cshtml" />
+    <Content Include="Areas\Default\Views\SaleInfoes\Details.cshtml" />
+    <Content Include="Areas\Default\Views\SaleInfoes\Edit.cshtml" />
+    <Content Include="Areas\Default\Views\SaleInfoes\Index.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

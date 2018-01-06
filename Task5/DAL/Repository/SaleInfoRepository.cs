@@ -9,7 +9,7 @@ namespace DAL.Repository
 {
     public class SaleInfoRepository : VirtualRepository<SaleInfo>
     {
-        protected ModelDataEntities2 managersContext;
+        protected ModelDataEntities2 _managersContext;
 
         Modell.SaleInfo ToObject(Modell.SaleInfo source)
         {
@@ -27,13 +27,13 @@ namespace DAL.Repository
             get
             {
                 var b = new List<Modell.SaleInfo>();
-                foreach (var a in this.managersContext.SaleInfo.Select(x => x))
+                foreach (var a in _managersContext.SaleInfo.Select(x => x))
                 {
                     b.Add(ToObject(a));
                 }
 
                 return b;
-                //return this.managersContext.SaleInfo.Select(x => this.ToObject(x));
+              
             }
         }
 

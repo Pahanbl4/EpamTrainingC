@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Modell.SaleInfo>
+
+@{
+    Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+   
+    <title>Index</title>
+</head>
+
+    <body>
+        <br>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dato)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sum)
+                </th>
+                <th>
+                    @Html.ActionLink("ClientName", "Index", new { sortBy = ViewBag.SortClientNameParameter, searc = Request["search"] })
+                </th>
+                <th>
+                    @Html.ActionLink("ManagerName", "Index", new { sortBy = ViewBag.SortManagerNameParameter,  searc = Request["search"] })
+                </th>
+                <th>
+                    @Html.ActionLink("ProductName", "Index", new { sortBy = ViewBag.SortProductNameParameter,  searc = Request["search"] })
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manager.ManagerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </body>
+</html>

@@ -9,7 +9,7 @@ namespace DAL.Repository
 {
    public class VirtualRepository<T> where T : class, IEntity
     {
-        protected ModelDataEntities2 managersContext;
+      
         public IEnumerable<T> GetById(int id)
         {
             using (var entity = new ModelDataEntities2())

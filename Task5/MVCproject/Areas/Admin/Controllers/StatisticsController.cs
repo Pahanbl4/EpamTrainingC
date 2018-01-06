@@ -13,6 +13,8 @@ namespace MVCproject.Areas.Admin.Controllers
 {
     public class StatisticsController : BaseController
     {
+        
+
         // GET: Admin/Statistics
         public ActionResult Index()
         {
@@ -22,10 +24,10 @@ namespace MVCproject.Areas.Admin.Controllers
        
         public ActionResult ChartColumn()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
 
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
@@ -40,10 +42,10 @@ namespace MVCproject.Areas.Admin.Controllers
 
         public ActionResult ChartBar()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
 
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
@@ -58,10 +60,10 @@ namespace MVCproject.Areas.Admin.Controllers
 
         public ActionResult ChartPie()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
 
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
@@ -76,10 +78,10 @@ namespace MVCproject.Areas.Admin.Controllers
 
         public ActionResult ChartThree()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
 
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
@@ -94,10 +96,10 @@ namespace MVCproject.Areas.Admin.Controllers
 
         public ActionResult ChartBubble()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
 
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
@@ -112,10 +114,10 @@ namespace MVCproject.Areas.Admin.Controllers
 
         public ActionResult ChartDoughnut()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
 
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
@@ -130,19 +132,21 @@ namespace MVCproject.Areas.Admin.Controllers
 
         public ActionResult ChartRadar()
         {
-            var _context = new ModelDataEntities2();
+            var saleInfo = new DAL.Repository.SaleInfoRepository();
             ArrayList xxx = new ArrayList();
             ArrayList yyy = new ArrayList();
+            ArrayList zzz = new ArrayList();
+           
             
-            var result = (from c in _context.SaleInfo select c);
+            var result = (from c in saleInfo.GetAll() select c);
             
             result.ToList().ForEach(rs => xxx.Add(rs.Dato));
             result.ToList().ForEach(rs => yyy.Add(rs.Sum));
-      
-
+            
+            
             new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
                 .AddTitle("Chart for Growth [Radar chart]")
-                .AddSeries("Default", chartType: "Radar",legend:"Name", xValue: xxx, yValues: yyy)
+                .AddSeries("Default", chartType: "Radar", xValue: xxx, yValues: yyy)
                 .Write("bmp");
 
             return null;

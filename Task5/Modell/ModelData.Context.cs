@@ -29,5 +29,7 @@ namespace Modell
         public virtual DbSet<Manager> Manager { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<SaleInfo> SaleInfo { get; set; }
+
+       
     }
 }
